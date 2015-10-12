@@ -1087,9 +1087,9 @@ Text Label 22900 13850 2    60   ~ 0
 FPGA_115
 Text Label 22900 13750 2    60   ~ 0
 FPGA_114
-Text Label 22250 11100 2    60   ~ 0
+Text Label 26900 7800 2    60   ~ 0
 FPGA_112
-Text Label 8450 7900 0    60   ~ 0
+Text Label 26900 7700 2    60   ~ 0
 FPGA_111
 Text Label 14450 13850 0    60   ~ 0
 FPGA_111
@@ -1105,7 +1105,7 @@ Text Label 14450 13350 0    60   ~ 0
 FPGA_117
 Text Label 14450 13250 0    60   ~ 0
 FPGA_118
-Text Label 12200 7750 2    60   ~ 0
+Text Label 11850 6950 0    60   ~ 0
 FPGA_132
 Text Label 9500 26850 2    60   ~ 0
 FPGA_131
@@ -1155,7 +1155,7 @@ Text Label 14450 12450 0    60   ~ 0
 FPGA_131
 Text Label 14450 12350 0    60   ~ 0
 FPGA_132
-Text Label 12200 6150 2    60   ~ 0
+Text Label 11850 7050 0    60   ~ 0
 FPGA_133
 Text Label 40350 15000 2    60   ~ 0
 FPGA_134
@@ -1613,8 +1613,6 @@ Wire Wire Line
 Wire Wire Line
 	22250 11400 22600 11400
 Wire Wire Line
-	22250 11100 22600 11100
-Wire Wire Line
 	4650 11850 7900 11850
 Wire Wire Line
 	6000 14850 4850 14850
@@ -1921,8 +1919,6 @@ F 3 "" H 22850 12300 60  0001 C CNN
 $EndComp
 Wire Wire Line
 	22250 12300 22600 12300
-Wire Wire Line
-	22150 10800 22600 10800
 Wire Wire Line
 	23700 12300 23600 12300
 Connection ~ 23700 12000
@@ -2495,14 +2491,11 @@ Wire Wire Line
 Wire Wire Line
 	40050 19650 40600 19650
 Wire Wire Line
-	41800 18050 42200 18050
+	40450 18050 42200 18050
 Wire Wire Line
-	40050 19150 40150 19150
-Wire Wire Line
-	40150 19150 40150 20750
+	40050 19150 40450 19150
 Wire Wire Line
 	40050 19550 40150 19550
-Connection ~ 40150 19550
 Wire Wire Line
 	38650 19550 38450 19550
 Wire Wire Line
@@ -2773,8 +2766,6 @@ Connection ~ 31500 19350
 Wire Wire Line
 	29850 19350 30100 19350
 Wire Wire Line
-	40150 20750 40750 20750
-Wire Wire Line
 	44350 23000 44150 23000
 Wire Wire Line
 	32700 19150 34100 19150
@@ -2842,8 +2833,6 @@ Wire Wire Line
 Wire Wire Line
 	44550 18400 44900 18400
 Connection ~ 41950 18150
-Wire Wire Line
-	41800 21750 41800 18050
 $Comp
 L R R39
 U 1 1 54A7665A
@@ -3177,8 +3166,6 @@ Wire Notes Line
 	34350 20650 34450 20650
 Text Notes 34500 20700 0    60   ~ 0
 FOR RUN/FLASH
-Text Label 40750 20750 0    60   ~ 0
-FLASH_CS
 Wire Wire Line
 	40350 21750 41800 21750
 Wire Wire Line
@@ -3742,8 +3729,6 @@ Text Notes 9500 26450 0    118  ~ 0
 SOFT RESET
 Text Notes 14900 13750 0    60   ~ 0
 to LED4
-Text Notes 21800 11100 2    60   ~ 0
-to LED4
 Text Notes 21800 11400 2    60   ~ 0
 to LED3
 Text Notes 21800 11700 2    60   ~ 0
@@ -4063,8 +4048,6 @@ Text Label 39550 24250 2    60   ~ 0
 FPGA_132
 Text Label 13500 8400 2    60   ~ 0
 FPGA_67
-Text Notes 21600 10800 2    60   ~ 0
-to LED5
 Text Notes 15050 15550 2    60   ~ 0
 to LED5
 Wire Wire Line
@@ -4137,7 +4120,7 @@ Wire Notes Line
 	36450 15500 36450 11050
 Text Notes 37000 14300 0    60   ~ 0
 FPGA Pin 121 socz80 UART CTS - input to fpga\nFPGA Pin 119 socz80 UART RTS - output from fpga\nFPGA Pin 120 socz80 UART RX - input to fpga\nFPGA Pin 118 socz80 UART TX - output from fpga
-Text Label 22150 10800 2    60   ~ 0
+Text Label 13250 7100 2    60   ~ 0
 FPGA_100
 Text Label 2550 12500 0    60   ~ 0
 VCCINT
@@ -4811,4 +4794,52 @@ Text Notes 31750 17850 0    60   ~ 0
 OLD: flash select button
 Wire Wire Line
 	40750 15200 40750 15000
+Wire Wire Line
+	40450 19150 40450 18050
+Connection ~ 40150 19150
+Wire Wire Line
+	40150 19550 40150 19150
+Text Label 26900 7900 2    60   ~ 0
+FPGA_114
+Text Label 26900 8000 2    60   ~ 0
+FPGA_115
+Text Label 27900 7700 0    60   ~ 0
+FPGA_116
+Text Label 27900 7800 0    60   ~ 0
+FPGA_117
+Wire Wire Line
+	27000 7700 26900 7700
+Wire Wire Line
+	26900 7800 27000 7800
+Wire Wire Line
+	27000 7900 26900 7900
+Wire Wire Line
+	26900 8000 27000 8000
+Wire Wire Line
+	27800 7700 27900 7700
+Wire Wire Line
+	27900 7800 27800 7800
+Wire Wire Line
+	11750 6950 11850 6950
+Wire Wire Line
+	11850 7050 11750 7050
+$Comp
+L CONN_4X2 P1
+U 1 1 561BD723
+P 27400 7850
+F 0 "P1" H 27400 8100 50  0000 C CNN
+F 1 "CONN_4X2" V 27400 7850 40  0000 C CNN
+F 2 "~" H 27400 7850 60  0000 C CNN
+F 3 "~" H 27400 7850 60  0000 C CNN
+	1    27400 7850
+	1    0    0    -1  
+$EndComp
+Text Label 28000 8000 0    60   ~ 0
++8Vi
+Text Label 28000 7900 0    60   ~ 0
+GND
+Wire Wire Line
+	28000 7900 27800 7900
+Wire Wire Line
+	27800 8000 28000 8000
 $EndSCHEMATC
