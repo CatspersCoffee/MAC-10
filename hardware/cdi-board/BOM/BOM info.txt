@@ -1,0 +1,23 @@
+
+from coilcraft
+https://secure.coilcraft.com/shopping_cart/item.cfm?loc=L
+part number: PCV-2-394-05L
+
+
+Fairchild Semiconductor LM393AN Dual Comparator, Open Collector O/P, 0.35 µs, 1.4 µs 2 ? 36 V 8-Pin PDIP
+RS Stock No.759-9396
+
+
+Fairchild RURG3060, Switching Diode, 600V 30A, 60ns, 2-pin TO-247
+RS Stock No.299-020
+
+
+FCA47N60
+RS Stock No.865-1237
+too expensive from RS, go ebay
+
+
+LM555CN/NOPB, Timer, 4.5 ? 16 V, 8-Pin MDIP
+RS Stock No.534-3469
+
+
