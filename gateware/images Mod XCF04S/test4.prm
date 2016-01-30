@@ -1,0 +1,17 @@
+PROMGEN: Xilinx Prom Generator P.20131013
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+promgen -w -p mcs -c FF -o "H:\Documents\Papilio Pro files\Modified Z80soc - papilio pro sowerbutts\05-04-2015 AntsMod 1\images Mod XCF04S//test4" -x xcf04s -u 00000000 "H:/Documents/Papilio Pro files/Modified Z80soc - papilio pro sowerbutts/05-04-2015 AntsMod 1/fpga/work/top_level.bit" 
+
+PROM H:\Documents\Papilio Pro files\Modified Z80soc - papilio pro sowerbutts\05-04-2015 AntsMod 1\images Mod XCF04S\test4.prm map: Fri Apr 10 11:01:27 2015
+
+Calculating PROM checksum with fill value ff
+
+Format        Mcs86 (32-bit)
+Size          512K
+PROM start    0000:0000
+PROM end      0007:ffff
+PROM checksum 032a44a5
+
+        Addr1        Addr2                     Date File(s)
+    0000:0000    0005:3393     Apr 10 11:01:14 2015 H:/Documents/Papilio Pro files/Modified Z80soc - papilio pro sowerbutts/05-04-2015 AntsMod 1/fpga/work/top_level.bit

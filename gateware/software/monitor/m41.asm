@@ -1,23 +1,17 @@
-gpport:    .equ $21
-        org 0xF000 + $
+gpport    equ 21H
+    ORG 0B000H
 start:
-	LD	A, $F8
+	LD	A,FFH
     out (gpport), a
 	call DELAY2
-	LD	A, $F4
-    out (gpport), a
-	call DELAY2
-	LD	A, $F2
-    out (gpport), a
-	call DELAY2
-  	LD	A, $F1
+  	LD	A,F0H
     out (gpport), a
 	call DELAY2
 	jp start
 DELAY2:
-	LD	C,$91	;d1
-	LD	B,$E1	;d2
-	LD	A,$23	;d3
+	LD	C,91H	
+	LD	B,E1H	
+	LD	A,23H	
 again31:
 	DEC	C
 	JP	Z, again30
@@ -32,5 +26,5 @@ again32:
 	JP again31
 again33:
 	RET
-	.END
 
+what_msg:           db "Error reduces\r\nYour expensive computer\r\nTo a simple stone.\r\n", 0

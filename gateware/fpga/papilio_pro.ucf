@@ -56,15 +56,27 @@ CONFIG PROHIBIT=P69;
 CONFIG PROHIBIT=P60;
 
 # 32MHz oscillator
-#NET sysclk_32m      LOC="P94"  | IOSTANDARD=LVTTL | PERIOD=31.25ns;
-NET sysclk_32m      LOC="P94"  | IOSTANDARD=LVTTL | PERIOD=33.33ns;
+NET sysclk_32m      LOC="P94"  | IOSTANDARD=LVTTL | PERIOD=31.25ns;  #for 32MHz osc
+#NET sysclk_32m      LOC="P94"  | IOSTANDARD=LVTTL | PERIOD=33.33ns; 	#for 30MHz osc
+
+NET INTinput  		LOC="P50" | IOSTANDARD=LVTTL;  # INT signal into cpu
+NET NMIinput  		LOC="P48" | IOSTANDARD=LVTTL;  # NMI signal into cpu
+
+
+
+
 
 # User LEDs
 NET leds(4)         LOC="P112" | DRIVE=12 | IOSTANDARD=LVTTL;   # LED1 on Papilio Pro board
-NET leds(3)         LOC="P126" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED1 on IO board - port 0x21 bit 3
+NET leds(3)         LOC="P126" | DRIVE=12 | IOSTANDARD=LVTTL;   # LED1 on IO board - port 0x21 bit 3
 NET leds(2)         LOC="P124" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED2 on IO board - port 0x21 bit 2
 NET leds(1)         LOC="P127" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED3 on IO board - port 0x21 bit 1
 NET leds(0)         LOC="P123" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED4 on IO board - port 0x21 bit 0
+
+NET port39(0)         LOC="P100" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED5 on MBoardv1 - port 0x39 bit 0
+NET port39(1)         LOC="P78" | DRIVE=24 | IOSTANDARD=LVTTL;   # MBoardv1 - port 0x39 bit 1
+
+NET port3A(0)         LOC="P79" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 37 on MBoardv1 i/o connector - port 0x3A bit 0
 
 # RS232 serial (to FTDI USB interface chip on Papilio Pro)
 NET serial_rx       LOC="P101" | IOSTANDARD=LVTTL | DRIVE=8 | SLEW=FAST;
@@ -91,7 +103,7 @@ NET console_select  LOC="P134" | IOSTANDARD=LVTTL | PULLUP; # IO board -- can be
 NET sdcard_spi_clk  LOC="P133" | IOSTANDARD=LVTTL | SLEW=FAST;
 NET sdcard_spi_cs   LOC="P92" | IOSTANDARD=LVTTL | SLEW=FAST;
 NET sdcard_spi_mosi LOC="P132" | IOSTANDARD=LVTTL | SLEW=FAST; #data into flash
-NET sdcard_spi_miso LOC="P111" | IOSTANDARD=LVTTL | SLEW=FAST | PULLUP; #data from flash
+NET sdcard_spi_miso LOC="P111" | IOSTANDARD=LVTTL | SLEW=FAST | PULLUP;
 
 # Bit bang SPI i/o
 #NET bbspi_clk  LOC="P133" | IOSTANDARD=LVTTL | SLEW=FAST;

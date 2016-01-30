@@ -1,7 +1,5 @@
 ; 2013-10-20: A simple but working ROM monitor program for the great Z80 system-on-FPGA project.
 ; 05-04-2015 Modification of the original monitor to read in program from serial flash (as per test2.asm)
-; 11-04-2015 working with TickLED using timer 1, check to compare value from timer 1. not lagging uart anymore from DELAY2 for tickLED. (backup make to this folder)
-; 11-04-2015 adding interrupt vectors, jump from interrupt vector to a place in 0xB000 up to 0xB000+4K (flash area) to process interrupt(s)
 
 
 ;           when "00000" => uartA_cs            <= req_io;  -- 00 ... 07
@@ -87,7 +85,6 @@ RAM_MB: equ 8
         out (MMU_PERM), a
         ; jump to monitor in new location
         jp boot
-
 
 
         org 0xF000 + $
@@ -820,10 +817,8 @@ do_lf:
         ;out (SPI_TX), a ; dummy byte while fast read fills pipeline or whatever
 
 
-		LD	H,$2F				;put 0x0F in the H reg
-	;	LD IX, 0xB000			;load IX with 0xB000
-	;	LD IX, 0x0100			;load IX with 0x0100
-		LD IX, 0x0000			;load IX with 0x2000
+		LD	H,$0F				;put 0x0F in the H reg
+		LD IX, 0xB000			;load IX with 0xB000
 
 again69:
 		LD	L,$FF				;put 0xFF in the L reg
@@ -856,7 +851,7 @@ again66:
 flash_sendaddress2:
         ld a, 0x00
         out (SPI_TX), a ; address byte 0
-        ld a, 0x00
+        ld a, 0xB0
         out (SPI_TX), a ; address byte 1
         ld a, 0x00
         out (SPI_TX), a ; address byte 2 (always 0 for our code)

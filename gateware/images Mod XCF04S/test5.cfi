@@ -2,10 +2,10 @@
 # Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 SOFTWARE_VERSION P.20131013
-DATE            04/09/2015 - 18:41
-SOURCE          H:\Documents\Papilio Pro files\Modified Z80soc - papilio pro sowerbutts\05-04-2015 AntsMod 1\images Mod XCF04S\xtest2.mcs
+DATE            04/12/2015 - 19:34
+SOURCE          H:\Documents\Papilio Pro files\Modified Z80soc - papilio pro sowerbutts\05-04-2015 AntsMod 1\images Mod XCF04S\test5.mcs
 DEVICE          XCF04S
 DATA_WIDTH      8
 FILL_DATA       0xFF
-SIGNATURE       0x032A87B9
+SIGNATURE       0x032B2202
 START_ADDRESS   0x00000000 END_ADDRESS 0x00053393 DIRECTION_UP   "H:/Documents/Papilio Pro files/Modified Z80soc - papilio pro sowerbutts/05-04-2015 AntsMod 1/fpga/work/top_level.bit" 6slx9tqg144

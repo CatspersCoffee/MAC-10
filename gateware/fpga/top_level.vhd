@@ -23,7 +23,22 @@ entity top_level is
            leds                : out   std_logic_vector(4 downto 0);
            reset_button        : in    std_logic;
            console_select      : in    std_logic;
+			  
+           port39              : out   std_logic_vector(7 downto 0);		-- modified AB 08-04-2015
+           port3A              : out   std_logic_vector(7 downto 0);		-- modified AB 09-04-2015			  
+			
 
+
+           INTinput      		 : in    std_logic;	-- modified AB 12-04-2015
+           NMIinput      		 : in    std_logic;	-- modified AB 12-04-2015
+			  
+			  
+	    --    clk_2HzEXT      	 : out    std_logic;	-- 		  
+			  
+			  
+			  
+			  
+			
            -- UART0 (to FTDI USB chip, no flow control)
            serial_rx           : in    std_logic;
            serial_tx           : out   std_logic;
@@ -45,13 +60,6 @@ entity top_level is
            sdcard_spi_clk      : out   std_logic;
            sdcard_spi_mosi     : out   std_logic;
            sdcard_spi_miso     : in    std_logic;
-			  
-			  
-           -- bit bang spi i/o
- --          bbspi_cs       		 : out   std_logic;
- --          bbspi_clk     		 : out   std_logic;
- --          bbspiDin     		 : out   std_logic;
-  --         bbspiDout     		 : in    std_logic;
 
 
            -- SDRAM chip
@@ -89,6 +97,9 @@ architecture Behavioral of top_level is
     signal clk_feedback         : std_logic;  -- PLL clock feedback
     signal clk_unbuffered       : std_logic;  -- unbuffered system clock
     signal clk                  : std_logic;  -- buffered system clock (all logic should be clocked by this)
+
+	-- signal clk_2HzINT			  : std_logic;		-- modified AB 16-01-2016
+
 
     -- console latch
     signal console_select_clk1  : std_logic;
@@ -130,11 +141,14 @@ architecture Behavioral of top_level is
     signal uartB_cs             : std_logic;
     signal uart0_cs             : std_logic;
     signal uart1_cs             : std_logic;
-    signal timer_cs             : std_logic;
+    signal timer1_cs             : std_logic;
+    signal timer3_cs             : std_logic;	 
     signal spimaster0_cs        : std_logic;
     signal spimaster1_cs        : std_logic;
     signal clkscale_cs          : std_logic;
     signal gpio_cs              : std_logic;
+	 signal gpio2_cs             : std_logic;
+ 
 
     -- data bus
     signal cpu_data_in          : std_logic_vector(7 downto 0);
@@ -144,22 +158,34 @@ architecture Behavioral of top_level is
     signal dram_data_out        : std_logic_vector(7 downto 0);
     signal uart0_data_out       : std_logic_vector(7 downto 0);
     signal uart1_data_out       : std_logic_vector(7 downto 0);
-    signal timer_data_out       : std_logic_vector(7 downto 0);
+    signal timer1_data_out       : std_logic_vector(7 downto 0);
+    signal timer3_data_out       : std_logic_vector(7 downto 0);	 
     signal spimaster0_data_out  : std_logic_vector(7 downto 0);
     signal spimaster1_data_out  : std_logic_vector(7 downto 0);
     signal mmu_data_out         : std_logic_vector(7 downto 0);
     signal clkscale_out         : std_logic_vector(7 downto 0);
     signal gpio_data_out        : std_logic_vector(7 downto 0);
+    signal gpio2_data_out       : std_logic_vector(7 downto 0);
+	 
 
     -- GPIO
     signal gpio_input           : std_logic_vector(7 downto 0);
-    signal gpio_output          : std_logic_vector(7 downto 0);
+    signal gpio_output_n1      : std_logic_vector(7 downto 0);
+	 
+	 signal gpio2_input           : std_logic_vector(7 downto 0);
+    signal gpio2_output_n1      : std_logic_vector(7 downto 0);
+    signal gpio2_output_n2      : std_logic_vector(7 downto 0);	 
 
     -- Interrupts
     signal cpu_interrupt_in     : std_logic;
-    signal timer_interrupt      : std_logic;
+	 
+	 signal INTinputE				  : std_logic;		-- modified AB 12-04-2015	 
+	 signal NMIinputE				  : std_logic;		-- modified AB 12-04-2015
+	 
+    signal timer1_interrupt      : std_logic;
     signal uart0_interrupt      : std_logic;
     signal uart1_interrupt      : std_logic;
+    signal timer3_interrupt      : std_logic;	 
 
 begin
     -- Hold CPU reset high for 8 clock cycles on startup,
@@ -195,20 +221,41 @@ begin
         end if;
     end process;
 
+
+
     -- GPIO input signal routing
     gpio_input <= coldboot & swap_uart01 & "000000";
 
     -- GPIO output signal routing
-    leds(0) <= gpio_output(0);
-    leds(1) <= gpio_output(1);
-    leds(2) <= gpio_output(2);
-    leds(3) <= gpio_output(3);
+    leds(0) <= gpio_output_n1(0);
+    leds(1) <= gpio_output_n1(1);
+    leds(2) <= gpio_output_n1(2);
+    leds(3) <= gpio_output_n1(3);
+	 
+	 port39(0) <= gpio2_output_n1(0);
+	 port39(1) <= gpio2_output_n1(1);
+
+	 port3A(0) <= gpio2_output_n2(0);		-- modified AB 09-04-2015	 
 
     -- User LED (LED1) on Papilio Pro indicates when the CPU is being asked to wait (eg by the SDRAM cache)
     leds(4) <= cpu_wait;
 
     -- Interrupt signal for the CPU
-    cpu_interrupt_in <= (timer_interrupt or uart0_interrupt or uart1_interrupt);
+--    cpu_interrupt_in <= (timer_interrupt);
+    cpu_interrupt_in <= (timer1_interrupt or uart0_interrupt or uart1_interrupt);	
+
+--    cpu_interrupt_in <= (timer_interrupt or uart0_interrupt or uart1_interrupt);	 
+
+--	 cpu_interrupt_in_NMI <= timer_interrupt;
+
+ --INTinputE <=  timer3_interrupt;
+
+	INTinputE <= INTinput;
+
+
+
+ --NMIinputE <=  NMIinput;
+
 
     -- Z80 CPU core
     cpu: entity work.Z80cpu
@@ -217,8 +264,16 @@ begin
                  clk => clk,
                  clk_enable => cpu_clk_enable,
                  m1_cycle => cpu_m1_cycle,
-                 interrupt => cpu_interrupt_in,
-                 nmi => '0',
+					  
+					  
+               --  interrupt => cpu_interrupt_in, 
+					--  interrupt => INTinput,
+					  interrupt => INTinputE,
+					  
+					  nmi => '0',
+					 --nmi => NMIinput,
+					--	nmi => NMIinputE,
+					 
                  req_mem => cpu_req_mem,
                  req_io => cpu_req_io,
                  req_read => req_read,
@@ -262,11 +317,14 @@ begin
         uartA_cs      <= '0';
         uartB_cs      <= '0';
         mmu_cs        <= '0';
-        timer_cs      <= '0';
+        timer1_cs     <= '0';
         spimaster0_cs <= '0';
         spimaster1_cs <= '0';
         clkscale_cs   <= '0';
         gpio_cs       <= '0';
+        gpio2_cs      <= '0';	
+        timer3_cs     <= '0';		  
+		  
 
         -- memory address decoding
         -- address space is organised as:
@@ -290,12 +348,16 @@ begin
         -- IO address decoding
         case virtual_address(7 downto 3) is
             when "00000" => uartA_cs            <= req_io;  -- 00 ... 07
-            when "00010" => timer_cs            <= req_io;  -- 10 ... 17
+            when "00010" => timer1_cs           <= req_io;  -- 10 ... 17
             when "00011" => spimaster0_cs       <= req_io;  -- 18 ... 1F
             when "00100" => gpio_cs             <= req_io;  -- 20 ... 27
             when "00101" => uartB_cs            <= req_io;  -- 28 ... 2F
             when "00110" => spimaster1_cs       <= req_io;  -- 30 ... 37
                                                             -- unused ports
+	         when "00111" => gpio2_cs	         <= req_io;  -- 38 ... 3F
+				
+	         when "01000" => timer3_cs           <= req_io;  -- 40 ... 47		
+																				
             when "11110" => clkscale_cs         <= req_io;  -- F0 ... F7
             when "11111" => mmu_cs              <= req_io;  -- F8 ... FF
             when others =>
@@ -331,12 +393,14 @@ begin
        sram_data_out       when       sram_cs='1' else
        uart0_data_out      when      uart0_cs='1' else
        uart1_data_out      when      uart1_cs='1' else
-       timer_data_out      when      timer_cs='1' else
+       timer1_data_out     when     timer1_cs='1' else
+       timer3_data_out     when     timer3_cs='1' else		 
        mmu_data_out        when        mmu_cs='1' else
        spimaster0_data_out when spimaster0_cs='1' else
        spimaster1_data_out when spimaster1_cs='1' else
        clkscale_out        when   clkscale_cs='1' else
        gpio_data_out       when       gpio_cs='1' else
+       gpio2_data_out      when      gpio2_cs='1' else						 
        rom_data_out; -- default case
 
    dram: entity work.DRAM
@@ -435,19 +499,45 @@ begin
            );
 
    -- Timer device (internally scales the clock to 1MHz)
-   timer: entity work.timer
+   timer1: entity work.timer1
    generic map ( clk_frequency => (clk_freq_mhz * 1000000) )
    port map(
                clk => clk,
                reset => system_reset,
                cpu_address => virtual_address(2 downto 0),
                data_in => cpu_data_out,
-               data_out => timer_data_out,
-               enable => timer_cs,
+               data_out => timer1_data_out,
+               enable => timer1_cs,
                req_read => req_read,
                req_write => req_write,
-               interrupt => timer_interrupt
+               interrupt => timer1_interrupt
            );
+
+----------------------------------------------------------------------------------------------------------------------------------
+   -- Timer3 device (internally scales the clock to 1MHz)
+   timer3: entity work.timer3
+   generic map ( clk_frequency => (clk_freq_mhz * 1000000) )
+   port map(
+	--	device side => top level side
+               clk => clk,
+               reset => system_reset,
+               cpu_address => virtual_address(2 downto 0),
+               data_in => cpu_data_out,
+               data_out => timer3_data_out,
+               enable => timer3_cs,
+               req_read => req_read,
+               req_write => req_write,
+               interrupt => timer3_interrupt
+           );
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
 
    -- SPI master device connected to Papilio Pro 8MB flash ROM
    spimaster0: entity work.spimaster
@@ -486,7 +576,7 @@ begin
            );
 
    -- GPIO to FPGA pins and/or internal signals
-   gpio: entity work.gpio
+   gpio: entity work.gpio2
    port map(
                clk => clk,
                reset => system_reset,
@@ -496,8 +586,26 @@ begin
                enable => gpio_cs,
                read_notwrite => req_read,
                input_pins => gpio_input,
-               output_pins => gpio_output
+               output_pins_n1 => gpio_output_n1
            );
+			  
+	  -- GPIO2 to FPGA pins and/or internal signals
+   gpio2: entity work.gpio2
+   port map(
+               clk => clk,
+               reset => system_reset,
+               cpu_address => virtual_address(2 downto 0),
+               data_in => cpu_data_out,
+               data_out => gpio2_data_out,
+               enable => gpio2_cs,
+               read_notwrite => req_read,
+               input_pins => gpio2_input,
+               output_pins_n1 => gpio2_output_n1, 
+               output_pins_n2 => gpio2_output_n2 					
+       --        output_pins => gpio2_output2		-- modified AB 09-04-2015					
+           );		  
+			 		  
+			  
 
    -- An attempt to allow the CPU clock to be scaled back to run
    -- at slower speeds without affecting the clock signal sent to
@@ -521,11 +629,11 @@ begin
    clock_pll: PLL_BASE 
    generic map (
                BANDWIDTH      => "OPTIMIZED",        -- "HIGH", "LOW" or "OPTIMIZED" 
-            --   CLKFBOUT_MULT  => 16,                 -- Multiply value for all CLKOUT clock outputs (1-64)
-					CLKFBOUT_MULT  => 17,  
+               CLKFBOUT_MULT  => 16,                 -- Multiply value for all CLKOUT clock outputs (1-64) for 32MHz osc
+				--	CLKFBOUT_MULT  => 17,  					  -- for 30MHz osc
                CLKFBOUT_PHASE => 0.0,                -- Phase offset in degrees of the clock feedback output (0.0-360.0).
-            --   CLKIN_PERIOD   => 31.25,              -- Input clock period in ns to ps resolution (i.e. 33.333 is 30 MHz).
-					CLKIN_PERIOD   => 33.33,
+               CLKIN_PERIOD   => 31.25,              -- Input clock period in ns to ps resolution (i.e. 33.333 is 30 MHz).
+				--	CLKIN_PERIOD   => 33.33,				  -- for 30MHz osc
                                                      -- CLKOUT0_DIVIDE - CLKOUT5_DIVIDE: Divide amount for CLKOUT# clock output (1-128)
                CLKOUT0_DIVIDE => 4,                  -- 32MHz * 16 / 4 = 128MHz. Adjust clk_freq_mhz constant (above) if you change this.
                CLKOUT1_DIVIDE => 1,

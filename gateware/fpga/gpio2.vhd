@@ -9,7 +9,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-entity gpio is
+entity gpio2 is
     port ( clk              : in  std_logic;
            reset            : in  std_logic;
            cpu_address      : in  std_logic_vector(2 downto 0);
@@ -21,9 +21,9 @@ entity gpio is
            output_pins_n1      : out std_logic_vector(7 downto 0);			  
            output_pins_n2    : out std_logic_vector(7 downto 0)
     );
-end gpio;
+end gpio2;
 
-architecture Behavioral of gpio is
+architecture Behavioral of gpio2 is
 
     signal captured_inputs  : std_logic_vector(7 downto 0);
     signal register_outputs_n1 : std_logic_vector(7 downto 0);	 
@@ -41,7 +41,7 @@ begin
     output_pins_n1 <= register_outputs_n1;
 	 output_pins_n2 <= register_outputs_n2;
 
-    gpio_proc: process(clk)
+    gpio2_proc: process(clk)
     begin
         if rising_edge(clk) then
             if reset = '1' then

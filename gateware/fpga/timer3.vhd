@@ -1,17 +1,7 @@
---+-----------------------------------+-------------------------------------+--
---|                      ___   ___    | (c) 2013-2014 William R Sowerbutts  |--
---|   ___  ___   ___ ___( _ ) / _ \   | will@sowerbutts.com                 |--
---|  / __|/ _ \ / __|_  / _ \| | | |  |                                     |--
---|  \__ \ (_) | (__ / / (_) | |_| |  | A Z80 FPGA computer, just for fun   |--
---|  |___/\___/ \___/___\___/ \___/   |                                     |--
---|                                   |              http://sowerbutts.com/ |--
---+-----------------------------------+-------------------------------------+--
---| A simple timer peripheral for timing intervals and generating periodic  |--
---| interrupts.                                                             |--
---+-------------------------------------------------------------------------+--
+
 --
 -- There are two timers; a 1MHz 32-bit counter which always counts up (unless reset to 0)
--- and whose value can be transferred atomically to a 32-bit latch, and a 1MHz 24-bit down
+-- and whose value can be transferred atomically to a 32-bit latch, and a 1MHz 32-bit down
 -- counter which triggers an interrupt and is reset to a programmable value upon reaching
 -- zero. Writes to the register at base+1 perform timer operations according to the value
 -- written. The 1MHz is derived by prescaling the system clock.
@@ -56,7 +46,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-entity timer1 is
+entity timer3 is
     generic (
            clk_frequency    : natural := (128 * 1000000)
     );
@@ -70,18 +60,20 @@ entity timer1 is
            req_write        : in  std_logic;
            interrupt        : out std_logic
     );
-end timer1;
+end timer3;
 
-architecture Behavioral of timer1 is
+architecture Behavioral of timer3 is
 
-    signal upcounter_value      : unsigned(31 downto 0) := (others => '0');
-    signal upcounter_latch      : unsigned(31 downto 0) := (others => '0');
+ --   signal upcounter_value      : unsigned(31 downto 0) := (others => '0');
+ --   signal upcounter_latch      : unsigned(31 downto 0) := (others => '0');
     signal downcounter_value    : unsigned(31 downto 0) := (others => '0');
     signal downcounter_start    : unsigned(31 downto 0) := (others => '0');
 
     -- if using frequencies > 128MHz this counter will need to be wider than 7 bits
     signal counter_prescale     : unsigned(6 downto 0)  := (others => '0');
-    constant prescale_wrap      : unsigned(6 downto 0)  := to_unsigned((clk_frequency / 1000000) - 1, 7); -- aim for a 1MHz counter
+  --  constant prescale_wrap      : unsigned(6 downto 0)  := to_unsigned((clk_frequency / 1000000) - 1, 7); -- aim for a 1MHz counter
+
+    constant prescale_wrap      : unsigned(6 downto 0)  := to_unsigned(clk_frequency/10, 7 ); 
 
     signal interrupt_enable     : std_logic := '0';
     signal interrupt_signal     : std_logic := '0';
@@ -108,8 +100,8 @@ begin
 
     with regmux_select select
         regmux_output <= 
-            std_logic_vector(upcounter_value  ) when "00",
-            std_logic_vector(upcounter_latch  ) when "01",
+     --       std_logic_vector(upcounter_value  ) when "00",
+     --       std_logic_vector(upcounter_latch  ) when "01",
             std_logic_vector(downcounter_value) when "10",
             std_logic_vector(downcounter_start) when "11",
             std_logic_vector(downcounter_start) when others;
@@ -126,8 +118,8 @@ begin
     begin
         if rising_edge(clk) then
             if reset = '1' then
-                upcounter_value    <= (others => '0');
-                upcounter_latch    <= (others => '0');
+  --              upcounter_value    <= (others => '0');
+  --              upcounter_latch    <= (others => '0');
                 downcounter_value  <= (others => '0');
                 downcounter_start  <= (others => '0');
                 counter_prescale   <= (others => '0');
@@ -138,7 +130,7 @@ begin
                 -- prescaled counter
                 if counter_prescale = prescale_wrap then
                     counter_prescale <= (others => '0'); -- reset prescale counter
-                    upcounter_value <= upcounter_value + 1;
+  --                  upcounter_value <= upcounter_value + 1;
                     if downcounter_value = 0 then
                         downcounter_value <= downcounter_start;
                         interrupt_signal <= '1';
@@ -157,8 +149,8 @@ begin
                     elsif cpu_address = "001" then
                         case data_in is
                             when "00000000" => interrupt_signal <= '0';
-                            when "00000001" => upcounter_value <= (others => '0');
-                            when "00000010" => upcounter_latch <= upcounter_value;
+  --                          when "00000001" => upcounter_value <= (others => '0');
+  --                          when "00000010" => upcounter_latch <= upcounter_value;
                             when "00000011" => downcounter_value <= downcounter_start;
                             when "00010000" => regmux_select <= "00";
                             when "00010001" => regmux_select <= "01";
@@ -168,8 +160,8 @@ begin
                         end case;
                     elsif cpu_address(2) = '1' then
                         case regmux_select is
-                            when "00" => upcounter_value   <= unsigned(regmux_updated);
-                            when "01" => upcounter_latch   <= unsigned(regmux_updated);
+ --                           when "00" => upcounter_value   <= unsigned(regmux_updated);
+ --                           when "01" => upcounter_latch   <= unsigned(regmux_updated);
                             when "10" => downcounter_value <= unsigned(regmux_updated);
                             when "11" => downcounter_start <= unsigned(regmux_updated);
                             when others =>

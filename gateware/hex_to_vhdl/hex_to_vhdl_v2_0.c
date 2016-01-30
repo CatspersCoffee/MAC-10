@@ -274,7 +274,8 @@ void bytesInLine(){ //gets the number of bytes in the current HEX Line (to calcu
 
 void openHEX(){
 	int n;
-   HEXFile = fopen ("M2.HEX" , "r");
+//   HEXFile = fopen ("M2.HEX" , "r");
+   HEXFile = fopen ("M2LV2.HEX" , "r");	
 // HEXFile = fopen ("SOCM1.HEX" , "r");
 //	HEXFile = fopen ("test6_2_0 test INTCONTROLLER.hex" , "r");
 	

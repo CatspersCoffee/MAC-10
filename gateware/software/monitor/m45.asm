@@ -1,17 +1,11 @@
-gpport:    .equ $21
-        org 0xF000 + $
+;gpport:	equ $21
+    org $B000
 start:
-	LD	A, $F8
-    out (gpport), a
+	LD	A, $Ff
+    out ($21), a
 	call DELAY2
-	LD	A, $F4
-    out (gpport), a
-	call DELAY2
-	LD	A, $F2
-    out (gpport), a
-	call DELAY2
-  	LD	A, $F1
-    out (gpport), a
+  	LD	A, $F0
+    out ($21), a
 	call DELAY2
 	jp start
 DELAY2:

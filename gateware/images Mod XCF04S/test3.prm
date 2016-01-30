@@ -3,7 +3,7 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 promgen -w -p mcs -c FF -o "H:\Documents\Papilio Pro files\Modified Z80soc - papilio pro sowerbutts\05-04-2015 AntsMod 1\images Mod XCF04S//test3" -x xcf04s -u 00000000 "H:/Documents/Papilio Pro files/Modified Z80soc - papilio pro sowerbutts/05-04-2015 AntsMod 1/fpga/work/top_level.bit" 
 
-PROM H:\Documents\Papilio Pro files\Modified Z80soc - papilio pro sowerbutts\05-04-2015 AntsMod 1\images Mod XCF04S\test3.prm map: Tue Apr 07 20:05:39 2015
+PROM H:\Documents\Papilio Pro files\Modified Z80soc - papilio pro sowerbutts\05-04-2015 AntsMod 1\images Mod XCF04S\test3.prm map: Thu Apr 09 18:39:15 2015
 
 Calculating PROM checksum with fill value ff
 
@@ -11,7 +11,7 @@ Format        Mcs86 (32-bit)
 Size          512K
 PROM start    0000:0000
 PROM end      0007:ffff
-PROM checksum 03299546
+PROM checksum 032a87b9
 
         Addr1        Addr2                     Date File(s)
-    0000:0000    0005:3393     Apr 07 20:04:54 2015 H:/Documents/Papilio Pro files/Modified Z80soc - papilio pro sowerbutts/05-04-2015 AntsMod 1/fpga/work/top_level.bit
+    0000:0000    0005:3393     Apr 09 18:37:49 2015 H:/Documents/Papilio Pro files/Modified Z80soc - papilio pro sowerbutts/05-04-2015 AntsMod 1/fpga/work/top_level.bit

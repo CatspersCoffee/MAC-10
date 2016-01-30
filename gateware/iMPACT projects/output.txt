@@ -1,0 +1,9 @@
+Storage Target: Xilinx Flash/PROM
+Storage Family: Platform Flash
+xcf04s          [4 M]
+FF
+Untitled
+H:/Documents/Papilio Pro files/Modified Z80soc - papilio pro sowerbutts/05-04-2015 AntsMod 1/fpga/work
+
+MCS
+No
