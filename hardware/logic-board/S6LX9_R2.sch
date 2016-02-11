@@ -155,7 +155,7 @@ $Descr A0 46811 33110
 encoding utf-8
 Sheet 1 1
 Title "noname.sch"
-Date "12 oct 2015"
+Date "8 feb 2016"
 Rev ""
 Comp ""
 Comment1 ""
@@ -873,8 +873,6 @@ F 3 "" H 2950 21250 60  0001 C CNN
 	1    2950 21250
 	-1   0    0    -1  
 $EndComp
-Text Label 11600 8500 0    60   ~ 0
-FPGA_48
 Text Label 12050 30300 2    60   ~ 0
 FPGA_46
 Text Label 12050 30400 2    60   ~ 0
@@ -889,12 +887,6 @@ Text Label 28750 18500 2    60   ~ 0
 FPGA_59
 Text Label 28750 18600 2    60   ~ 0
 FPGA_58
-Text Label 11600 8200 0    60   ~ 0
-FPGA_57
-Text Label 11600 8300 0    60   ~ 0
-FPGA_56
-Text Label 11600 8400 0    60   ~ 0
-FPGA_55
 NoConn ~ 5850 23600
 NoConn ~ 5850 21700
 Text Label 6150 23200 0    60   ~ 0
@@ -1087,10 +1079,8 @@ Text Label 22900 13850 2    60   ~ 0
 FPGA_115
 Text Label 22900 13750 2    60   ~ 0
 FPGA_114
-Text Label 26900 7800 2    60   ~ 0
+Text Label 26050 8300 2    60   ~ 0
 FPGA_112
-Text Label 26900 7700 2    60   ~ 0
-FPGA_111
 Text Label 14450 13850 0    60   ~ 0
 FPGA_111
 Text Label 14450 13750 0    60   ~ 0
@@ -1105,8 +1095,6 @@ Text Label 14450 13350 0    60   ~ 0
 FPGA_117
 Text Label 14450 13250 0    60   ~ 0
 FPGA_118
-Text Label 11850 6950 0    60   ~ 0
-FPGA_132
 Text Label 9500 26850 2    60   ~ 0
 FPGA_131
 Text Label 22250 12000 2    60   ~ 0
@@ -1155,9 +1143,7 @@ Text Label 14450 12450 0    60   ~ 0
 FPGA_131
 Text Label 14450 12350 0    60   ~ 0
 FPGA_132
-Text Label 11850 7050 0    60   ~ 0
-FPGA_133
-Text Label 40350 15000 2    60   ~ 0
+Text Label 14300 8450 2    60   ~ 0
 FPGA_134
 Text Label 12050 30200 2    60   ~ 0
 FPGA_137
@@ -1667,10 +1653,6 @@ Text Label 12050 29250 2    60   ~ 0
 FPGA_7
 Text Label 13700 29100 0    60   ~ 0
 FPGA_9
-Text Label 10300 7100 2    60   ~ 0
-FPGA_8
-Text Label 10300 7200 2    60   ~ 0
-FPGA_7
 Text Label 13700 30800 0    60   ~ 0
 FPGA_6
 Text Label 3800 21500 0    60   ~ 0
@@ -1929,10 +1911,8 @@ Text Label 6150 22100 0    60   ~ 0
 FPGA_67
 Text Label 6150 22200 0    60   ~ 0
 FPGA_66
-Text Label 14900 6900 0    60   ~ 0
+Text Label 26050 8000 2    60   ~ 0
 FPGA_67
-Text Label 14900 7000 0    60   ~ 0
-FPGA_66
 Wire Wire Line
 	6150 22100 5850 22100
 Wire Wire Line
@@ -1945,9 +1925,9 @@ Wire Wire Line
 	14250 17350 14050 17350
 Wire Wire Line
 	14050 17450 14250 17450
-Text Label 14900 7100 0    60   ~ 0
+Text Label 26050 8200 2    60   ~ 0
 FPGA_75
-Text Label 13850 6450 0    60   ~ 0
+Text Label 26050 8100 2    60   ~ 0
 FPGA_74
 Text Label 2750 -5100 0    60   ~ 0
 V1.2
@@ -2323,17 +2303,6 @@ Text Label 29850 19350 2    60   ~ 0
 GND
 Text Notes 32900 20600 0    60   ~ 0
 Q2 out is LOW on PowerUp
-$Comp
-L SW_PUSH SW1
-U 1 1 54A764C1
-P 29650 18600
-F 0 "SW1" H 29800 18710 50  0000 C CNN
-F 1 "RESET" H 29650 18520 50  0000 C CNN
-F 2 "" H 29650 18600 60  0001 C CNN
-F 3 "" H 29650 18600 60  0001 C CNN
-	1    29650 18600
-	0    -1   -1   0   
-$EndComp
 Text Label 29750 18250 0    60   ~ 0
 GND
 $Comp
@@ -3579,10 +3548,6 @@ Wire Wire Line
 	5850 22500 6150 22500
 Wire Wire Line
 	6150 22600 5850 22600
-Text Label 8450 6950 0    60   ~ 0
-FPGA_61
-Text Label 8450 6850 0    60   ~ 0
-FPGA_62
 Text Label 9400 23650 2    60   ~ 0
 FPGA_64
 Text Label 6150 21900 0    60   ~ 0
@@ -3662,10 +3627,6 @@ Text Notes 11000 28150 0    118  ~ 0
 SDRAM
 Wire Wire Line
 	43500 7400 44450 7400
-Text Label 10350 8550 0    60   ~ 0
-FPGA_50
-Text Label 10350 8450 0    60   ~ 0
-FPGA_51
 Text Label 40950 14500 0    60   ~ 0
 TX_SOUT
 Text Label 40950 14600 0    60   ~ 0
@@ -3690,14 +3651,6 @@ Text Notes 14900 12150 0    60   ~ 0
 console select jumper
 Text Notes 41400 14300 0    60   ~ 0
 Pin 3 (RTS) - OUTPUT from FT232\nPin 11 (CTS) - INPUT to FT232\n
-Text Notes 39050 15000 0    60   ~ 0
-console select ->\npull to GND to make\nthis system console
-Wire Wire Line
-	40350 15000 40750 15000
-Text Label 40450 15200 2    60   ~ 0
-GND
-Wire Wire Line
-	40450 15200 40750 15200
 Wire Wire Line
 	39950 14300 40950 14300
 Wire Wire Line
@@ -3728,7 +3681,7 @@ to soft reset button
 Text Notes 9500 26450 0    118  ~ 0
 SOFT RESET
 Text Notes 14900 13750 0    60   ~ 0
-to LED4
+to Flash 2
 Text Notes 21800 11400 2    60   ~ 0
 to LED3
 Text Notes 21800 11700 2    60   ~ 0
@@ -4046,8 +3999,6 @@ Text Label 39550 24150 2    60   ~ 0
 FPGA_133
 Text Label 39550 24250 2    60   ~ 0
 FPGA_132
-Text Label 13500 8400 2    60   ~ 0
-FPGA_67
 Text Notes 15050 15550 2    60   ~ 0
 to LED5
 Wire Wire Line
@@ -4120,19 +4071,17 @@ Wire Notes Line
 	36450 15500 36450 11050
 Text Notes 37000 14300 0    60   ~ 0
 FPGA Pin 121 socz80 UART CTS - input to fpga\nFPGA Pin 119 socz80 UART RTS - output from fpga\nFPGA Pin 120 socz80 UART RX - input to fpga\nFPGA Pin 118 socz80 UART TX - output from fpga
-Text Label 13250 7100 2    60   ~ 0
-FPGA_100
-Text Label 2550 12500 0    60   ~ 0
+Text Label 4350 12300 0    60   ~ 0
 VCCINT
-Text Label 2500 12050 0    60   ~ 0
+Text Label 4500 11600 0    60   ~ 0
 VCCAUX
-Text Label 2550 13300 0    60   ~ 0
+Text Label 4400 12900 0    60   ~ 0
 VCC0_0
-Text Label 2500 13600 0    60   ~ 0
+Text Label 4350 13450 0    60   ~ 0
 VCC0_1
-Text Label 2500 14050 0    60   ~ 0
+Text Label 4400 13850 0    60   ~ 0
 VCC0_2
-Text Label 2500 14350 0    60   ~ 0
+Text Label 4400 14200 0    60   ~ 0
 VCC0_3
 Wire Wire Line
 	4850 14200 4400 14200
@@ -4793,53 +4742,121 @@ V3.3
 Text Notes 31750 17850 0    60   ~ 0
 OLD: flash select button
 Wire Wire Line
-	40750 15200 40750 15000
-Wire Wire Line
 	40450 19150 40450 18050
 Connection ~ 40150 19150
 Wire Wire Line
 	40150 19550 40150 19150
-Text Label 26900 7900 2    60   ~ 0
+Text Label 30700 27500 2    60   ~ 0
 FPGA_114
-Text Label 26900 8000 2    60   ~ 0
+Text Label 30700 27600 2    60   ~ 0
 FPGA_115
-Text Label 27900 7700 0    60   ~ 0
+Text Label 33650 28000 0    60   ~ 0
 FPGA_116
-Text Label 27900 7800 0    60   ~ 0
+Text Label 33650 28100 0    60   ~ 0
 FPGA_117
 Wire Wire Line
-	27000 7700 26900 7700
+	26050 8300 26300 8300
 Wire Wire Line
-	26900 7800 27000 7800
+	30700 27500 31300 27500
 Wire Wire Line
-	27000 7900 26900 7900
+	30700 27600 31300 27600
 Wire Wire Line
-	26900 8000 27000 8000
+	33100 28000 33650 28000
 Wire Wire Line
-	27800 7700 27900 7700
-Wire Wire Line
-	27900 7800 27800 7800
-Wire Wire Line
-	11750 6950 11850 6950
-Wire Wire Line
-	11850 7050 11750 7050
+	33050 28100 33650 28100
 $Comp
-L CONN_4X2 P1
-U 1 1 561BD723
-P 27400 7850
-F 0 "P1" H 27400 8100 50  0000 C CNN
-F 1 "CONN_4X2" V 27400 7850 40  0000 C CNN
-F 2 "~" H 27400 7850 60  0000 C CNN
-F 3 "~" H 27400 7850 60  0000 C CNN
-	1    27400 7850
+L M25P80 U7
+U 1 1 56A1E9B3
+P 31900 27650
+F 0 "U7" H 31900 27650 60  0000 C CNN
+F 1 "M25P80" H 32000 27550 60  0000 C CNN
+F 2 "" H 31900 27650 60  0000 C CNN
+F 3 "" H 31900 27650 60  0000 C CNN
+	1    31900 27650
 	1    0    0    -1  
 $EndComp
-Text Label 28000 8000 0    60   ~ 0
-+8Vi
-Text Label 28000 7900 0    60   ~ 0
+Text Label 33950 27250 0    60   ~ 0
+V3.3
+$Comp
+L R R14
+U 1 1 56A1E9D0
+P 33350 27600
+F 0 "R14" V 33430 27600 50  0000 C CNN
+F 1 "1K" V 33350 27600 50  0000 C CNN
+F 2 "" H 33350 27600 60  0001 C CNN
+F 3 "" H 33350 27600 60  0001 C CNN
+	1    33350 27600
+	0    1    1    0   
+$EndComp
+Text Label 30750 28300 2    60   ~ 0
 GND
 Wire Wire Line
-	28000 7900 27800 7900
+	33100 27600 32650 27600
 Wire Wire Line
-	27800 8000 28000 8000
+	31300 27700 31000 27700
+Wire Wire Line
+	31000 27700 31000 28100
+Wire Wire Line
+	31000 28100 32950 28100
+Wire Wire Line
+	32950 28100 32950 27600
+Connection ~ 32950 27600
+Wire Wire Line
+	33950 27250 33800 27250
+Wire Wire Line
+	33800 27250 33800 27600
+Wire Wire Line
+	33800 27600 33600 27600
+Wire Wire Line
+	32650 27500 33800 27500
+Connection ~ 33800 27500
+Wire Wire Line
+	31300 27800 31200 27800
+Wire Wire Line
+	31200 27800 31200 28300
+Wire Wire Line
+	31200 28300 30750 28300
+Wire Wire Line
+	32650 27700 33100 27700
+Wire Wire Line
+	33100 27700 33100 28000
+Wire Wire Line
+	32650 27800 33050 27800
+Wire Wire Line
+	33050 27800 33050 28100
+Wire Notes Line
+	26950 24950 36150 24950
+Wire Notes Line
+	36150 24950 36150 31150
+Wire Notes Line
+	36150 31150 26950 31150
+Wire Notes Line
+	26950 31150 26950 24950
+Text Notes 29600 25400 0    139  ~ 0
+25Pxx Serial Flash 2 
+Text Label 30300 6250 0    60   ~ 0
+V3.3
+Wire Wire Line
+	29900 6100 30150 6100
+Wire Wire Line
+	30150 6100 30150 6250
+Wire Wire Line
+	30150 6250 30300 6250
+Wire Wire Line
+	26300 8100 26050 8100
+Wire Wire Line
+	26050 8200 26300 8200
+$Comp
+L CONN_4 P1
+U 1 1 56A36069
+P 26650 8150
+F 0 "P1" V 26600 8150 50  0000 C CNN
+F 1 "FPGA PINS" V 26700 8150 50  0000 C CNN
+F 2 "" H 26650 8150 60  0000 C CNN
+F 3 "" H 26650 8150 60  0000 C CNN
+	1    26650 8150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	26300 8000 26050 8000
 $EndSCHEMATC

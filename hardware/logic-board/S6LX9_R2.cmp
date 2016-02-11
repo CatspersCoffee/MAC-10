@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 10/12/2015 10:41:05 PM
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 1/23/2016 10:53:01 PM
 
 BeginCmp
 TimeStamp = /561B6E8E;
@@ -260,10 +260,10 @@ IdModule  = ^^conn_usb_A-vert2;
 EndCmp
 
 BeginCmp
-TimeStamp = /561BD723;
+TimeStamp = /56A36069;
 Reference = P1;
-ValeurCmp = CONN_4X2;
-IdModule  = PIN_ARRAY_4x2;
+ValeurCmp = FPGA PINS;
+IdModule  = PIN_ARRAY_4x1;
 EndCmp
 
 BeginCmp
@@ -424,6 +424,13 @@ BeginCmp
 TimeStamp = /54A76666;
 Reference = R13;
 ValeurCmp = 470;
+IdModule  = ^^SMD_Resistor-0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /56A1E9D0;
+Reference = R14;
+ValeurCmp = 1K;
 IdModule  = ^^SMD_Resistor-0805;
 EndCmp
 
@@ -738,6 +745,13 @@ EndCmp
 BeginCmp
 TimeStamp = /54A76375;
 Reference = U6;
+ValeurCmp = M25P80;
+IdModule  = -SO8;
+EndCmp
+
+BeginCmp
+TimeStamp = /56A1E9B3;
+Reference = U7;
 ValeurCmp = M25P80;
 IdModule  = -SO8;
 EndCmp
