@@ -1,38 +1,17 @@
-Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 10/16/2015 5:04:32 PM
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 1/23/2016 3:09:55 PM
 
 BeginCmp
-TimeStamp = /561EE02F;
+TimeStamp = /56A2E809;
 Reference = C1;
-ValeurCmp = 100nF;
-IdModule  = ^^C2;
+ValeurCmp = 0.01uF;
+IdModule  = Cap_Elec_Radial_5mm;
 EndCmp
 
 BeginCmp
-TimeStamp = /561EE078;
+TimeStamp = /56A2F509;
 Reference = C2;
-ValeurCmp = 10uF 25V;
-IdModule  = ^^C2;
-EndCmp
-
-BeginCmp
-TimeStamp = /561EE2B2;
-Reference = C3;
-ValeurCmp = 100nF;
-IdModule  = ^^C2;
-EndCmp
-
-BeginCmp
-TimeStamp = /561EE8D9;
-Reference = C4;
-ValeurCmp = 0.47uF 275VAC;
-IdModule  = ^^C_14mm;
-EndCmp
-
-BeginCmp
-TimeStamp = /561EE8CE;
-Reference = C5;
-ValeurCmp = 0.47uF 275VAC;
-IdModule  = ^^C_14mm;
+ValeurCmp = 0.01uF;
+IdModule  = C2;
 EndCmp
 
 BeginCmp
@@ -45,20 +24,13 @@ EndCmp
 BeginCmp
 TimeStamp = /56205ECE;
 Reference = C7;
-ValeurCmp = CP_US;
+ValeurCmp = 0.33uF;
 IdModule  = Cap_Elec_Radial_5mm;
 EndCmp
 
 BeginCmp
 TimeStamp = /561FAEBA;
 Reference = C8;
-ValeurCmp = 10 uF;
-IdModule  = SM1206_Opendous;
-EndCmp
-
-BeginCmp
-TimeStamp = /56204425;
-Reference = C9;
 ValeurCmp = 10 uF;
 IdModule  = SM1206_Opendous;
 EndCmp
@@ -71,24 +43,10 @@ IdModule  = SM1206_Opendous;
 EndCmp
 
 BeginCmp
-TimeStamp = /56205EDB;
-Reference = C11;
-ValeurCmp = CP_US;
-IdModule  = Cap_Elec_Radial_5mm;
-EndCmp
-
-BeginCmp
 TimeStamp = /561FAE64;
 Reference = C12;
 ValeurCmp = 10 uF;
 IdModule  = SM1206_Opendous;
-EndCmp
-
-BeginCmp
-TimeStamp = /562063AD;
-Reference = C13;
-ValeurCmp = CP_US;
-IdModule  = Cap_Elec_Radial_5mm;
 EndCmp
 
 BeginCmp
@@ -113,52 +71,10 @@ IdModule  = ^^C2-5.08mm;
 EndCmp
 
 BeginCmp
-TimeStamp = /561EDFB7;
-Reference = D1;
-ValeurCmp = 1N5408;
-IdModule  = ^^Diode_Zener-15mm3;
-EndCmp
-
-BeginCmp
-TimeStamp = /561EDFBD;
-Reference = D2;
-ValeurCmp = 1N5408;
-IdModule  = ^^Diode_Zener-15mm3;
-EndCmp
-
-BeginCmp
-TimeStamp = /561EE024;
-Reference = D3;
-ValeurCmp = 1N4004;
-IdModule  = ^^Diode_Zener-10mm3;
-EndCmp
-
-BeginCmp
-TimeStamp = /561EE852;
-Reference = D4;
-ValeurCmp = 1N5408;
-IdModule  = ^^Diode_Zener-15mm3;
-EndCmp
-
-BeginCmp
-TimeStamp = /561FCDE9;
-Reference = D5;
-ValeurCmp = RURG3060;
-IdModule  = ^^TO247VverticalDiode;
-EndCmp
-
-BeginCmp
 TimeStamp = /50789F43;
 Reference = D25;
 ValeurCmp = 1N4001;
 IdModule  = ^^Diode_General-10mm;
-EndCmp
-
-BeginCmp
-TimeStamp = /561FDDEE;
-Reference = L1;
-ValeurCmp = PCV-2-394-05L;
-IdModule  = ^^PCV-2-394-05L;
 EndCmp
 
 BeginCmp
@@ -169,24 +85,45 @@ IdModule  = ^^PowerSelect3;
 EndCmp
 
 BeginCmp
-TimeStamp = /56208E51;
+TimeStamp = /56A2F7D1;
+Reference = P2;
+ValeurCmp = VR IN;
+IdModule  = PIN_ARRAY_2X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /56A30C1A;
 Reference = P3;
-ValeurCmp = COIL;
-IdModule  = ^^PowerSelect3_1;
+ValeurCmp = cdi trig;
+IdModule  = PIN_ARRAY_2X1;
 EndCmp
 
 BeginCmp
-TimeStamp = /562068A0;
+TimeStamp = /56A3098B;
 Reference = P4;
-ValeurCmp = 12v in;
-IdModule  = ^^PowerSelect3;
+ValeurCmp = opto out;
+IdModule  = PIN_ARRAY_2X1;
 EndCmp
 
 BeginCmp
-TimeStamp = /56209439;
+TimeStamp = /56A30704;
 Reference = P5;
-ValeurCmp = GEN A;
-IdModule  = ^^PowerSelect3;
+ValeurCmp = 555 out;
+IdModule  = PIN_ARRAY_2X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /56A311DB;
+Reference = P6;
+ValeurCmp = CAS1;
+IdModule  = PIN_ARRAY_2X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /56A3163E;
+Reference = P7;
+ValeurCmp = FPGA 48;
+IdModule  = PIN_ARRAY_2X1;
 EndCmp
 
 BeginCmp
@@ -246,13 +183,6 @@ IdModule  = ^^MOUNTING_HOLE;
 EndCmp
 
 BeginCmp
-TimeStamp = /561FC786;
-Reference = Q1;
-ValeurCmp = FCA47N60;
-IdModule  = ^^-TO3Pvertical;
-EndCmp
-
-BeginCmp
 TimeStamp = /561EFA5C;
 Reference = R1;
 ValeurCmp = 330 0.25W;
@@ -267,30 +197,23 @@ IdModule  = R4;
 EndCmp
 
 BeginCmp
-TimeStamp = /561EE03A;
+TimeStamp = /56A2EA53;
 Reference = R3;
-ValeurCmp = 51ohm 0.25W;
+ValeurCmp = 1K 0.25W;
 IdModule  = R4;
 EndCmp
 
 BeginCmp
-TimeStamp = /561EE063;
+TimeStamp = /56A2D69B;
 Reference = R4;
 ValeurCmp = 1K 0.25W;
 IdModule  = R4;
 EndCmp
 
 BeginCmp
-TimeStamp = /561EEADA;
+TimeStamp = /56A2EDE4;
 Reference = R5;
-ValeurCmp = 1M 0.25W;
-IdModule  = R4;
-EndCmp
-
-BeginCmp
-TimeStamp = /561EEACF;
-Reference = R6;
-ValeurCmp = 1M 0.25W;
+ValeurCmp = 100 ohm 0.25W;
 IdModule  = R4;
 EndCmp
 
@@ -299,13 +222,6 @@ TimeStamp = /561FAEA7;
 Reference = R7;
 ValeurCmp = 4.53k;
 IdModule  = ^^SMD_Resistor-0805;
-EndCmp
-
-BeginCmp
-TimeStamp = /562089C8;
-Reference = R8;
-ValeurCmp = 100 0.5W;
-IdModule  = R4-5;
 EndCmp
 
 BeginCmp
@@ -339,28 +255,7 @@ EndCmp
 BeginCmp
 TimeStamp = /561F92FC;
 Reference = R17;
-ValeurCmp = 10K 0.25W;
-IdModule  = R4;
-EndCmp
-
-BeginCmp
-TimeStamp = /561F9307;
-Reference = R18;
-ValeurCmp = 15K 0.25W;
-IdModule  = R4;
-EndCmp
-
-BeginCmp
-TimeStamp = /561FCA79;
-Reference = R19;
-ValeurCmp = 1M 0.25W 2%;
-IdModule  = R4;
-EndCmp
-
-BeginCmp
-TimeStamp = /561FD0F4;
-Reference = R20;
-ValeurCmp = 10K 0.25W 2%;
+ValeurCmp = 1K3 0.25W;
 IdModule  = R4;
 EndCmp
 
@@ -442,10 +337,10 @@ IdModule  = R4;
 EndCmp
 
 BeginCmp
-TimeStamp = /561EE282;
-Reference = SCR1;
-ValeurCmp = BT151;
-IdModule  = ^^TO220;
+TimeStamp = /56A2EB86;
+Reference = T1;
+ValeurCmp = -NPN-TO92;
+IdModule  = transistor-TO92;
 EndCmp
 
 BeginCmp
@@ -463,13 +358,6 @@ IdModule  = -TO92;
 EndCmp
 
 BeginCmp
-TimeStamp = /561EE273;
-Reference = TH1;
-ValeurCmp = NTC;
-IdModule  = ^^C2;
-EndCmp
-
-BeginCmp
 TimeStamp = /561EF273;
 Reference = U1;
 ValeurCmp = 4N25;
@@ -481,13 +369,6 @@ TimeStamp = /561F3F2F;
 Reference = U2;
 ValeurCmp = OMEGA_PCC-SMP_K-TYPE;
 IdModule  = ^^OMEGA_PCC-SMP-K-Type;
-EndCmp
-
-BeginCmp
-TimeStamp = /561F87E7;
-Reference = U3;
-ValeurCmp = LM393;
-IdModule  = DIP-8__300;
 EndCmp
 
 BeginCmp
@@ -505,31 +386,10 @@ IdModule  = ^^LT3081_TSSOP16;
 EndCmp
 
 BeginCmp
-TimeStamp = /56204441;
-Reference = U6;
-ValeurCmp = LM1086CS_TO252_DPAK;
-IdModule  = -TO252;
-EndCmp
-
-BeginCmp
 TimeStamp = /561F9E57;
 Reference = U7;
 ValeurCmp = ^^LM555N;
 IdModule  = DIP-8__300;
-EndCmp
-
-BeginCmp
-TimeStamp = /56206DA5;
-Reference = U8;
-ValeurCmp = POWER_SELECT;
-IdModule  = ^^PowerSelect2_1;
-EndCmp
-
-BeginCmp
-TimeStamp = /56207B37;
-Reference = U9;
-ValeurCmp = KILL SEL;
-IdModule  = ^^PowerSelect2;
 EndCmp
 
 BeginCmp
@@ -549,7 +409,7 @@ EndCmp
 BeginCmp
 TimeStamp = /561FD457;
 Reference = VR1;
-ValeurCmp = 10K Variable;
+ValeurCmp = 1M Variable;
 IdModule  = ^^Variable_Resistor;
 EndCmp
 
@@ -557,6 +417,13 @@ BeginCmp
 TimeStamp = /5078A49C;
 Reference = VR2;
 ValeurCmp = 10K Variable;
+IdModule  = ^^Variable_Resistor;
+EndCmp
+
+BeginCmp
+TimeStamp = /56A2DAB1;
+Reference = VR3;
+ValeurCmp = 50K Variable;
 IdModule  = ^^Variable_Resistor;
 EndCmp
 
