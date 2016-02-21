@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 1/23/2016 10:53:01 PM
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 2/20/2016 12:14:49 PM
 
 BeginCmp
 TimeStamp = /561B6E8E;
@@ -137,7 +137,7 @@ BeginCmp
 TimeStamp = /561B6E38;
 Reference = C20;
 ValeurCmp = 10 uF;
-IdModule  = SM1206_Opendous;
+IdModule  = ^^SM1812;
 EndCmp
 
 BeginCmp
@@ -151,7 +151,7 @@ BeginCmp
 TimeStamp = /561B6E3E;
 Reference = C22;
 ValeurCmp = 10 uF;
-IdModule  = SM1206_Opendous;
+IdModule  = ^^SM1812;
 EndCmp
 
 BeginCmp
@@ -246,24 +246,10 @@ IdModule  = ^^LED-0805;
 EndCmp
 
 BeginCmp
-TimeStamp = /54A766DE;
-Reference = Jx1;
-ValeurCmp = USB_2;
-IdModule  = ^^conn_usb_A-vert2;
-EndCmp
-
-BeginCmp
-TimeStamp = /54A763FE;
-Reference = Jx2;
-ValeurCmp = USB_2;
-IdModule  = ^^conn_usb_A-vert2;
-EndCmp
-
-BeginCmp
-TimeStamp = /56A36069;
+TimeStamp = /56C55714;
 Reference = P1;
 ValeurCmp = FPGA PINS;
-IdModule  = PIN_ARRAY_4x1;
+IdModule  = PIN_ARRAY_5X1;
 EndCmp
 
 BeginCmp
@@ -274,24 +260,17 @@ IdModule  = ^^PIN_ARRAY_10X2;
 EndCmp
 
 BeginCmp
+TimeStamp = /56C7C97B;
+Reference = P3;
+ValeurCmp = USB_Header;
+IdModule  = PIN_ARRAY_4X2;
+EndCmp
+
+BeginCmp
 TimeStamp = /54A7669F;
 Reference = P5;
 ValeurCmp = PIC_ISP;
 IdModule  = SIL-6;
-EndCmp
-
-BeginCmp
-TimeStamp = /498E1A7D;
-Reference = P6;
-ValeurCmp = CONN_1;
-IdModule  = ^^1BIGpin;
-EndCmp
-
-BeginCmp
-TimeStamp = /498E1A85;
-Reference = P7;
-ValeurCmp = CONN_1;
-IdModule  = ^^1BIGpin;
 EndCmp
 
 BeginCmp
@@ -325,6 +304,13 @@ EndCmp
 BeginCmp
 TimeStamp = /54A767B1;
 Reference = Q2;
+ValeurCmp = ^^NPN-SOT23;
+IdModule  = ^^-SOT23;
+EndCmp
+
+BeginCmp
+TimeStamp = /56C79F11;
+Reference = Q3;
 ValeurCmp = ^^NPN-SOT23;
 IdModule  = ^^-SOT23;
 EndCmp
@@ -554,6 +540,13 @@ IdModule  = ^^SMD_Resistor-0805;
 EndCmp
 
 BeginCmp
+TimeStamp = /56C7A8DC;
+Reference = R32;
+ValeurCmp = 470;
+IdModule  = ^^SMD_Resistor-0805;
+EndCmp
+
+BeginCmp
 TimeStamp = /54A763B4;
 Reference = R33;
 ValeurCmp = 1K;
@@ -578,20 +571,6 @@ BeginCmp
 TimeStamp = /561B6E50;
 Reference = R36;
 ValeurCmp = 1K;
-IdModule  = ^^SMD_Resistor-0805;
-EndCmp
-
-BeginCmp
-TimeStamp = /54A763E5;
-Reference = R37;
-ValeurCmp = 10K;
-IdModule  = ^^SMD_Resistor-0805;
-EndCmp
-
-BeginCmp
-TimeStamp = /54A763EB;
-Reference = R38;
-ValeurCmp = 10k;
 IdModule  = ^^SMD_Resistor-0805;
 EndCmp
 
@@ -677,13 +656,6 @@ TimeStamp = /54A76419;
 Reference = Rx2;
 ValeurCmp = 330;
 IdModule  = ^^SMD_Resistor-0805;
-EndCmp
-
-BeginCmp
-TimeStamp = /54A764C1;
-Reference = SW1;
-ValeurCmp = RESET;
-IdModule  = SW_PUSH_SMALL;
 EndCmp
 
 BeginCmp
