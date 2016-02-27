@@ -81,9 +81,7 @@ architecture Behavioral of timer1 is
 
     -- if using frequencies > 128MHz this counter will need to be wider than 7 bits
     signal counter_prescale     : unsigned(6 downto 0)  := (others => '0');
-  --  constant prescale_wrap      : unsigned(6 downto 0)  := to_unsigned((clk_frequency / 1000000) - 1, 7); -- aim for a 1MHz counter
-
-    constant prescale_wrap      : unsigned(6 downto 0)  := to_unsigned(clk_frequency/10, 7 );   -- for 128MHz
+    constant prescale_wrap      : unsigned(6 downto 0)  := to_unsigned((clk_frequency / 1000000) - 1, 7); -- aim for a 1MHz counter
 
     signal interrupt_enable     : std_logic := '0';
     signal interrupt_signal     : std_logic := '0';

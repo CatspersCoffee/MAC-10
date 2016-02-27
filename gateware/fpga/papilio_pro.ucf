@@ -73,18 +73,29 @@ NET leds(2)         LOC="P124" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED2 on IO boa
 NET leds(1)         LOC="P127" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED3 on IO board - port 0x21 bit 1
 NET leds(0)         LOC="P123" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED4 on IO board - port 0x21 bit 0
 
-NET port39(0)         LOC="P100" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED5 on MBoardv1 - port 0x39 bit 0
+NET port39(0)         LOC="P100" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED D8 on MBoardv1 - port 0x39 bit 0
 NET port39(1)         LOC="P78" | DRIVE=24 | IOSTANDARD=LVTTL;   # MBoardv1 - port 0x39 bit 1
 
 NET port3A(0)         LOC="P79" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 37 on MBoardv1 i/o connector - port 0x3A bit 0
 
+
+NET pin51         LOC="P51" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 24 on MBoardv1 i/o connector 
+NET pin56         LOC="P56" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 20 on MBoardv1 i/o connector 
+NET pin66         LOC="P66" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 6 on MBoardv1 i/o connector 
+NET pin65         LOC="P65" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 8 on MBoardv1 i/o connector 
+NET pin62         LOC="P62" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 10 on MBoardv1 i/o connector 
+NET Extern_0      LOC="P55" | IOSTANDARD=LVTTL;   #  pin 55 on MBoardv1 i/o connector 
+
+
 # RS232 serial (to FTDI USB interface chip on Papilio Pro)
-NET serial_rx       LOC="P101" | IOSTANDARD=LVTTL | DRIVE=8 | SLEW=FAST;
-NET serial_tx       LOC="P105" | IOSTANDARD=LVTTL | DRIVE=8 | SLEW=FAST;
+#NET serial_rx       LOC="P66" | IOSTANDARD=LVTTL | DRIVE=8 | SLEW=FAST;
+#NET serial_tx       LOC="P65" | IOSTANDARD=LVTTL | DRIVE=8 | SLEW=FAST;
+
+
 
 # RS232 serial (to MAX3232 RS232 line driver on IO board)
 NET uart1_rx        LOC="P120" | IOSTANDARD=LVTTL | DRIVE=8 | SLEW=FAST; # IO board MAX3232 (input)
-NET uart1_cts       LOC="P121" | IOSTANDARD=LVTTL | DRIVE=8 | SLEW=FAST; # IO board MAX3232 (input)
+#NET uart1_cts       LOC="P121" | IOSTANDARD=LVTTL | DRIVE=8 | SLEW=FAST; # IO board MAX3232 (input)
 NET uart1_tx        LOC="P118" | IOSTANDARD=LVTTL | DRIVE=8 | SLEW=FAST; # IO board MAX3232 (output)
 NET uart1_rts       LOC="P119" | IOSTANDARD=LVTTL | DRIVE=8 | SLEW=FAST; # IO board MAX3232 (output)
 
@@ -94,28 +105,20 @@ NET reset_button    LOC="P131" | IOSTANDARD=LVTTL | PULLDOWN; # IO board
 # System console select jumper on IO board
 NET console_select  LOC="P134" | IOSTANDARD=LVTTL | PULLUP; # IO board -- can be optionally pulled to GND through jumper
 
-# SPI to SD card socket on IO board
-#NET sdcard_spi_clk  LOC="P116" | IOSTANDARD=LVTTL | SLEW=FAST;
-#NET sdcard_spi_cs   LOC="P114" | IOSTANDARD=LVTTL | SLEW=FAST;
-#NET sdcard_spi_mosi LOC="P115" | IOSTANDARD=LVTTL | SLEW=FAST;
-#NET sdcard_spi_miso LOC="P117" | IOSTANDARD=LVTTL | SLEW=FAST | PULLUP;
+# to Flash1 on MBoardv1
+NET flash1_spi_clk  LOC="P133" | IOSTANDARD=LVTTL | SLEW=FAST;
+NET flash1_spi_cs   LOC="P92" | IOSTANDARD=LVTTL | SLEW=FAST;
+NET flash1_spi_mosi LOC="P132" | IOSTANDARD=LVTTL | SLEW=FAST; #data into flash
+NET flash1_spi_miso LOC="P111" | IOSTANDARD=LVTTL | SLEW=FAST | PULLUP;
 
-NET sdcard_spi_clk  LOC="P133" | IOSTANDARD=LVTTL | SLEW=FAST;
-NET sdcard_spi_cs   LOC="P92" | IOSTANDARD=LVTTL | SLEW=FAST;
-NET sdcard_spi_mosi LOC="P132" | IOSTANDARD=LVTTL | SLEW=FAST; #data into flash
-NET sdcard_spi_miso LOC="P111" | IOSTANDARD=LVTTL | SLEW=FAST | PULLUP;
+# to Flash2 on MBoardv1
+NET flash2_spi_cs    LOC="P38"  | IOSTANDARD=LVTTL | SLEW=FAST;
+NET flash2_spi_clk   LOC="P105"  | IOSTANDARD=LVTTL | SLEW=FAST;
+NET flash2_spi_mosi  LOC="P64"  | IOSTANDARD=LVTTL | SLEW=FAST;
+NET flash2_spi_miso  LOC="P101"  | IOSTANDARD=LVTTL | SLEW=FAST | PULLUP;
+#FPGA P101 to pin2 Flash (Dout)
+#FPGA P105 to pin6 Flash (CLK)
 
-# Bit bang SPI i/o
-#NET bbspi_clk  LOC="P133" | IOSTANDARD=LVTTL | SLEW=FAST;
-#NET bbspi_cs   LOC="P92" | IOSTANDARD=LVTTL | SLEW=FAST;
-#NET bbspiDin 	LOC="P132" | IOSTANDARD=LVTTL | SLEW=FAST; #data into flash
-#NET bbspiDout 	LOC="P111" | IOSTANDARD=LVTTL | SLEW=FAST | PULLUP; #data from flash
-
-# SPI flash on Papilio Pro (MX25L6445E)
-NET flash_spi_cs    LOC="P38"  | IOSTANDARD=LVTTL | SLEW=FAST;
-NET flash_spi_clk   LOC="P70"  | IOSTANDARD=LVTTL | SLEW=FAST;
-NET flash_spi_mosi  LOC="P64"  | IOSTANDARD=LVTTL | SLEW=FAST;
-NET flash_spi_miso  LOC="P65"  | IOSTANDARD=LVTTL | SLEW=FAST | PULLUP;
 
 # SDRAM on Papilio Pro (MT48LC4M16)
 NET SDRAM_ADDR(0)   LOC="P140" | IOSTANDARD=LVTTL | SLEW=FAST;           # SDRAM_ADDR0

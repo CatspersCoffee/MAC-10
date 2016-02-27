@@ -31,7 +31,17 @@ entity top_level is
 
            INTinput      		 : in    std_logic;	-- modified AB 12-04-2015
            NMIinput      		 : in    std_logic;	-- modified AB 12-04-2015
+	
+
+		--	  interrupt00			 : in    std_logic;
 			  
+			  Extern_0				 : in		std_logic;			  
+			  
+			  pin51					 : out    std_logic;
+			  pin56					 : out    std_logic;	
+			  pin66					 : out    std_logic;	
+			  pin65					 : out    std_logic;				  
+			  pin62					 : out    std_logic;
 			  
 	    --    clk_2HzEXT      	 : out    std_logic;	-- 		  
 			  
@@ -40,8 +50,8 @@ entity top_level is
 			  
 			
            -- UART0 (to FTDI USB chip, no flow control)
-           serial_rx           : in    std_logic;
-           serial_tx           : out   std_logic;
+ --          serial_rx           : in    std_logic;
+ --          serial_tx           : out   std_logic;
 
            -- UART0 (to MAX3232 level shifter chip, hardware flow control)
            uart1_rx            : in    std_logic;
@@ -49,17 +59,18 @@ entity top_level is
            uart1_tx            : out   std_logic;
            uart1_rts           : out   std_logic;
 
-           -- SPI flash chip
-           flash_spi_cs        : out   std_logic;
-           flash_spi_clk       : out   std_logic;
-           flash_spi_mosi      : out   std_logic;
-           flash_spi_miso      : in    std_logic;
 
-           -- SD card socket
-           sdcard_spi_cs       : out   std_logic;
-           sdcard_spi_clk      : out   std_logic;
-           sdcard_spi_mosi     : out   std_logic;
-           sdcard_spi_miso     : in    std_logic;
+           -- SPI Flash 1
+           flash1_spi_cs       : out   std_logic;
+           flash1_spi_clk      : out   std_logic;
+           flash1_spi_mosi     : out   std_logic;
+           flash1_spi_miso     : in    std_logic;
+
+           -- SPI Flash 2
+           flash2_spi_cs       : out   std_logic;
+           flash2_spi_clk      : out   std_logic;
+           flash2_spi_mosi     : out   std_logic;
+           flash2_spi_miso     : in    std_logic;
 
 
            -- SDRAM chip
@@ -129,8 +140,8 @@ architecture Behavioral of top_level is
     signal cpu_wait             : std_logic;
     signal dram_wait            : std_logic;
     signal mmu_wait             : std_logic;
-    signal spimaster0_wait      : std_logic;
     signal spimaster1_wait      : std_logic;
+    signal spimaster2_wait      : std_logic;	 
 
     -- chip selects
     signal mmu_cs               : std_logic;
@@ -138,17 +149,18 @@ architecture Behavioral of top_level is
     signal sram_cs              : std_logic;
     signal dram_cs              : std_logic;
     signal uartA_cs             : std_logic;
-    signal uartB_cs             : std_logic;
-    signal uart0_cs             : std_logic;
+ --   signal uartB_cs             : std_logic;
+--    signal uart0_cs             : std_logic;
     signal uart1_cs             : std_logic;
     signal timer1_cs             : std_logic;
     signal timer3_cs             : std_logic;	 
-    signal spimaster0_cs        : std_logic;
+	 signal timerD2_cs             : std_logic; 
     signal spimaster1_cs        : std_logic;
+    signal spimaster2_cs        : std_logic;	 
     signal clkscale_cs          : std_logic;
     signal gpio_cs              : std_logic;
 	 signal gpio2_cs             : std_logic;
- 
+ 	 signal intLatchs_cs			  : std_logic;
 
     -- data bus
     signal cpu_data_in          : std_logic_vector(7 downto 0);
@@ -156,12 +168,13 @@ architecture Behavioral of top_level is
     signal rom_data_out         : std_logic_vector(7 downto 0);
     signal sram_data_out        : std_logic_vector(7 downto 0);
     signal dram_data_out        : std_logic_vector(7 downto 0);
-    signal uart0_data_out       : std_logic_vector(7 downto 0);
+ --   signal uart0_data_out       : std_logic_vector(7 downto 0);
     signal uart1_data_out       : std_logic_vector(7 downto 0);
     signal timer1_data_out       : std_logic_vector(7 downto 0);
     signal timer3_data_out       : std_logic_vector(7 downto 0);	 
-    signal spimaster0_data_out  : std_logic_vector(7 downto 0);
+    signal timerD2_data_out       : std_logic_vector(7 downto 0);	 	 
     signal spimaster1_data_out  : std_logic_vector(7 downto 0);
+    signal spimaster2_data_out  : std_logic_vector(7 downto 0);	 
     signal mmu_data_out         : std_logic_vector(7 downto 0);
     signal clkscale_out         : std_logic_vector(7 downto 0);
     signal gpio_data_out        : std_logic_vector(7 downto 0);
@@ -182,10 +195,18 @@ architecture Behavioral of top_level is
 	 signal INTinputE				  : std_logic;		-- modified AB 12-04-2015	 
 	 signal NMIinputE				  : std_logic;		-- modified AB 12-04-2015
 	 
+	 
+	 
+	 signal interruptMASTER			: std_logic;
+	 
+	 
     signal timer1_interrupt      : std_logic;
     signal uart0_interrupt      : std_logic;
     signal uart1_interrupt      : std_logic;
-    signal timer3_interrupt      : std_logic;	 
+    signal timer3_interrupt      : std_logic;	
+
+		--External Events
+	 signal Extern_0_intern					: std_logic;		
 
 begin
     -- Hold CPU reset high for 8 clock cycles on startup,
@@ -197,7 +218,8 @@ begin
             -- signals which feed control logic into our clock domain.
             reset_button_clk1 <= reset_button;
             reset_button_sync <= reset_button_clk1;
-            console_select_clk1 <= console_select;
+				
+            console_select_clk1 <= console_select;		 
             console_select_sync <= console_select_clk1;
 
             -- reset the system when requested
@@ -250,12 +272,20 @@ begin
 
  --INTinputE <=  timer3_interrupt;
 
-	INTinputE <= INTinput;
+--	INTinputE <= INTinput;
 
+--	INTinputE <= interrupt00;
+--	INTinputE <= '0';	
 
+	INTinputE <= interruptMASTER;
+-- pin56 <= interruptMASTER;
+	
 
  --NMIinputE <=  NMIinput;
-
+ 
+ 
+--	Extern_0_intern <= Extern_0;
+	Extern_0_intern <= interruptMASTER;
 
     -- Z80 CPU core
     cpu: entity work.Z80cpu
@@ -267,8 +297,10 @@ begin
 					  
 					  
                --  interrupt => cpu_interrupt_in, 
-					--  interrupt => INTinput,
 					  interrupt => INTinputE,
+				--	  interrupt => INTinput, 
+
+					--	interrupt => '0',	 --(disable interrupt active high)				  
 					  
 					  nmi => '0',
 					 --nmi => NMIinput,
@@ -306,7 +338,8 @@ begin
 
     -- This process determines which IO or memory device the CPU is addressing
     -- and asserts the appropriate chip select signals.
-    cs_process: process(req_mem, req_io, physical_address, virtual_address, uartA_cs, uartB_cs, swap_uart01)
+ --   cs_process: process(req_mem, req_io, physical_address, virtual_address, uartA_cs, uartB_cs, swap_uart01)
+    cs_process: process(req_mem, req_io, physical_address, virtual_address, uartA_cs, swap_uart01)	 
     begin
         -- memory chip selects: default to unselected
         rom_cs   <= '0';
@@ -315,16 +348,17 @@ begin
 
         -- io chip selects: default to unselected
         uartA_cs      <= '0';
-        uartB_cs      <= '0';
+ --       uartB_cs      <= '0';
         mmu_cs        <= '0';
         timer1_cs     <= '0';
-        spimaster0_cs <= '0';
-        spimaster1_cs <= '0';
+        spimaster1_cs <= '0';		  
+        spimaster2_cs <= '0';
         clkscale_cs   <= '0';
         gpio_cs       <= '0';
         gpio2_cs      <= '0';	
-        timer3_cs     <= '0';		  
-		  
+        timer3_cs     <= '0';		
+        timerD2_cs     <= '0';		  
+		  intLatchs_cs <= '0';			  
 
         -- memory address decoding
         -- address space is organised as:
@@ -349,14 +383,18 @@ begin
         case virtual_address(7 downto 3) is
             when "00000" => uartA_cs            <= req_io;  -- 00 ... 07
             when "00010" => timer1_cs           <= req_io;  -- 10 ... 17
-            when "00011" => spimaster0_cs       <= req_io;  -- 18 ... 1F
+            when "00011" => spimaster2_cs       <= req_io;  -- 18 ... 1F
             when "00100" => gpio_cs             <= req_io;  -- 20 ... 27
-            when "00101" => uartB_cs            <= req_io;  -- 28 ... 2F
+ --           when "00101" => uartB_cs            <= req_io;  -- 28 ... 2F
             when "00110" => spimaster1_cs       <= req_io;  -- 30 ... 37
                                                             -- unused ports
 	         when "00111" => gpio2_cs	         <= req_io;  -- 38 ... 3F
 				
 	         when "01000" => timer3_cs           <= req_io;  -- 40 ... 47		
+
+	         when "01001" => intLatchs_cs        <= req_io;  -- 48 ... 4F		
+				
+	         when "01010" => timerD2_cs           <= req_io;  -- 50 ... 57					
 																				
             when "11110" => clkscale_cs         <= req_io;  -- F0 ... F7
             when "11111" => mmu_cs              <= req_io;  -- F8 ... FF
@@ -365,20 +403,20 @@ begin
 
         -- send the UART chip select to the appropriate UART depending
         -- on whether they have been swapped over or not.
-        if swap_uart01 = '0' then
-            uart0_cs <= uartB_cs;
+     --   if swap_uart01 = '0' then
+     --       uart0_cs <= uartB_cs;
             uart1_cs <= uartA_cs;
-        else
-            uart0_cs <= uartA_cs;
-            uart1_cs <= uartB_cs;
-        end if;
+     --   else
+     --       uart0_cs <= uartA_cs;
+     --       uart1_cs <= uartB_cs;
+     --   end if;
     end process;
 
     -- the selected memory device can request the CPU to wait
     mem_wait <=
        dram_wait       when dram_cs='1' else
-       spimaster0_wait when spimaster0_cs='1' else
        spimaster1_wait when spimaster1_cs='1' else
+       spimaster2_wait when spimaster2_cs='1' else		 
        '0';
 
     -- the MMU can, at any time, request the CPU wait (this is used when 
@@ -391,13 +429,14 @@ begin
        rom_data_out        when        rom_cs='1' else
        dram_data_out       when       dram_cs='1' else
        sram_data_out       when       sram_cs='1' else
-       uart0_data_out      when      uart0_cs='1' else
+ --      uart0_data_out      when      uart0_cs='1' else
        uart1_data_out      when      uart1_cs='1' else
        timer1_data_out     when     timer1_cs='1' else
-       timer3_data_out     when     timer3_cs='1' else		 
+       timer3_data_out     when     timer3_cs='1' else	
+       timerD2_data_out     when     timerD2_cs='1' else		 
        mmu_data_out        when        mmu_cs='1' else
-       spimaster0_data_out when spimaster0_cs='1' else
        spimaster1_data_out when spimaster1_cs='1' else
+       spimaster2_data_out when spimaster2_cs='1' else		 
        clkscale_out        when   clkscale_cs='1' else
        gpio_data_out       when       gpio_cs='1' else
        gpio2_data_out      when      gpio2_cs='1' else						 
@@ -460,35 +499,35 @@ begin
            );
 
    -- UART connected to FTDI USB UART
-   uart0: entity work.uart_interface
-   generic map ( watch_for_reset => 1, clk_frequency => (clk_freq_mhz * 1000000) )
-   port map(
-               clk => clk,
-               reset => system_reset,
-               reset_out => reset_request_uart, -- result of watching for reset sequence on the input
-               serial_in => serial_rx,
-               serial_out => serial_tx,
-               serial_rts => open,
-               serial_cts => '0',
-               cpu_address => virtual_address(2 downto 0),
-               cpu_data_in => cpu_data_out,
-               cpu_data_out => uart0_data_out,
-               enable => uart0_cs,
-               interrupt => uart0_interrupt,
-               req_read => req_read,
-               req_write => req_write
-           );
+ --  uart0: entity work.uart_interface
+ --  generic map ( watch_for_reset => 1, clk_frequency => (clk_freq_mhz * 1000000) )
+ --  port map(
+ --              clk => clk,
+ --              reset => system_reset,
+ --              reset_out => reset_request_uart, -- result of watching for reset sequence on the input
+ --             serial_in => serial_rx,
+ --              serial_out => serial_tx,
+ --              serial_rts => open,
+ --              serial_cts => '0',
+ --              cpu_address => virtual_address(2 downto 0),
+ --              cpu_data_in => cpu_data_out,
+ --              cpu_data_out => uart0_data_out,
+ --              enable => uart0_cs,
+ --              interrupt => uart0_interrupt,
+ --              req_read => req_read,
+ --              req_write => req_write
+ --          );
 
-   -- UART connected to MAX3232 on optional IO board
+   -- UART connected to 
    uart1: entity work.uart_interface
    generic map ( flow_control => 1, clk_frequency => (clk_freq_mhz * 1000000) )
    port map(
                clk => clk,
-               reset => system_reset,
+               reset => reset_request_uart,
                serial_in => uart1_rx,
                serial_out => uart1_tx,
                serial_rts => uart1_rts,
-               serial_cts => uart1_cts,
+               serial_cts => '0',
                cpu_address => virtual_address(2 downto 0),
                cpu_data_in => cpu_data_out,
                cpu_data_out => uart1_data_out,
@@ -534,30 +573,60 @@ begin
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
-
-
-
-
-
-   -- SPI master device connected to Papilio Pro 8MB flash ROM
-   spimaster0: entity work.spimaster
+----------------------------------------------------------------------------------------------------------------------------------
+   -- Timer2 device (internally scales the clock to 1MHz)
+   timer2: entity work.timerD2
    port map(
+	--	device side => top level side
                clk => clk,
                reset => system_reset,
                cpu_address => virtual_address(2 downto 0),
-               cpu_wait => spimaster0_wait,
                data_in => cpu_data_out,
-               data_out => spimaster0_data_out,
-               enable => spimaster0_cs,
+               data_out => timerD2_data_out,
+               enable => timerD2_cs,
                req_read => req_read,
                req_write => req_write,
-               slave_cs => flash_spi_cs,
-               slave_clk => flash_spi_clk,
-               slave_mosi => flash_spi_mosi,
-               slave_miso => flash_spi_miso
+					testPin1 => pin66,
+					testPin2 => pin62,					
+					FIN_out => pin65,
+					interruptIN => Extern_0_intern
+             --  interrupt => timerD2_interrupt
            );
 
-   -- SPI master device connected to SD card socket on the IO board
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------------------------------
+   -- Interrupt Register Latchs
+   intA: entity work.int1
+   port map(
+	--	device side => top level side
+               clk => clk,
+               reset => system_reset,
+               cpu_address => virtual_address(2 downto 0),
+               data_in => cpu_data_out,
+               enable => intLatchs_cs,
+               req_read => req_read,
+               req_write => req_write,
+               interruptOut => interruptMASTER,
+				--	interruptIN_00 => interrupt00,
+				--	interruptIN_00 =>	INTinput,
+					interruptIN_00 => Extern_0,
+					test1 => pin51,
+					test2 => pin56					
+           );
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+   -- SPI master device connected to Flash1 on MBoardv1
    spimaster1: entity work.spimaster
    port map(
                clk => clk,
@@ -569,11 +638,37 @@ begin
                enable => spimaster1_cs,
                req_read => req_read,
                req_write => req_write,
-               slave_cs => sdcard_spi_cs,
-               slave_clk => sdcard_spi_clk,
-               slave_mosi => sdcard_spi_mosi,
-               slave_miso => sdcard_spi_miso
+               slave_cs => flash1_spi_cs,
+               slave_clk => flash1_spi_clk,
+               slave_mosi => flash1_spi_mosi,
+               slave_miso => flash1_spi_miso
            );
+
+   -- SPI master device connected to Flash2 on MBoardv1
+   spimaster2: entity work.spimaster
+   port map(
+               clk => clk,
+               reset => system_reset,
+               cpu_address => virtual_address(2 downto 0),
+               cpu_wait => spimaster2_wait,
+               data_in => cpu_data_out,
+               data_out => spimaster2_data_out,
+               enable => spimaster2_cs,
+               req_read => req_read,
+               req_write => req_write,
+               slave_cs => flash2_spi_cs,
+               slave_clk => flash2_spi_clk,
+               slave_mosi => flash2_spi_mosi,
+               slave_miso => flash2_spi_miso
+           );
+
+
+
+
+
+
+
+
 
    -- GPIO to FPGA pins and/or internal signals
    gpio: entity work.gpio2
