@@ -42,6 +42,7 @@ entity top_level is
 			  pin66					 : out    std_logic;	
 			  pin65					 : out    std_logic;				  
 			  pin62					 : out    std_logic;
+			  pin98					 : out    std_logic;			  
 			  
 	    --    clk_2HzEXT      	 : out    std_logic;	-- 		  
 			  
@@ -207,6 +208,12 @@ architecture Behavioral of top_level is
 
 		--External Events
 	 signal Extern_0_intern					: std_logic;		
+	 
+	 
+	 signal INTERN_00					: std_logic;	
+
+	 signal pin98dummy_00					: std_logic;		 
+	 signal pin98dummy_00B					: std_logic;
 
 begin
     -- Hold CPU reset high for 8 clock cycles on startup,
@@ -286,6 +293,11 @@ begin
  
 --	Extern_0_intern <= Extern_0;
 	Extern_0_intern <= interruptMASTER;
+
+
+	pin98dummy_00B <=	pin98dummy_00;
+	pin98 <=	pin98dummy_00B;
+
 
     -- Z80 CPU core
     cpu: entity work.Z80cpu
@@ -587,8 +599,9 @@ begin
                req_read => req_read,
                req_write => req_write,
 					testPin1 => pin66,
-					testPin2 => pin62,					
-					FIN_out => pin65,
+					testPin2 => pin62,
+					testPin3 => pin98dummy_00,					
+					FIN_out => INTERN_00,
 					interruptIN => Extern_0_intern
              --  interrupt => timerD2_interrupt
            );
@@ -596,6 +609,22 @@ begin
 
 
 ----------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------
+   -- 
+   tigoutA: entity work.oneshot
+   port map(
+	--	device side => top level side
+               clk => clk,
+               reset => system_reset,
+               sigOUT => pin65,
+					sigIN => pin98dummy_00B				
+           );
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
 
 ----------------------------------------------------------------------------------------------------------------------------------
    -- Interrupt Register Latchs

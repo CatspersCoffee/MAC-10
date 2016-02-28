@@ -2,10 +2,10 @@
 # Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
 
 SOFTWARE_VERSION O.87xd
-DATE            02/27/2016 - 22:51
+DATE            02/28/2016 - 20:51
 SOURCE          H:\Documents\Xilinx Projects\MAC10v1\31-01-2016 AntsMod 4\fpga\BIT FILE\Untitled.mcs
 DEVICE          XCF04S
 DATA_WIDTH      8
 FILL_DATA       0xFF
-SIGNATURE       0x033CE69A
+SIGNATURE       0x033B4A7A
 START_ADDRESS   0x00000000 END_ADDRESS 0x00053393 DIRECTION_UP   "H:/Documents/Xilinx Projects/MAC10v1/31-01-2016 AntsMod 4/fpga/work/top_level.bit" 6slx9tqg144

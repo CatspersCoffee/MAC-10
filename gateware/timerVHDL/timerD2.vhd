@@ -49,10 +49,10 @@ entity timerD2 is
            req_read         : in  std_logic;
            req_write        : in  std_logic;
 			  testPin1     	 : out std_logic;	
-			  testPin2     	 : out std_logic;				  
+			  testPin2     	 : out std_logic;	
+			  testPin3     	 : out std_logic;			  
 			  FIN_out		    : out std_logic;	  
 			  interruptIN		 : in  std_logic
-        --   interrupt        : out std_logic
     );
 end timerD2;
 
@@ -62,7 +62,9 @@ architecture Behavioral of timerD2 is
     signal upcounter_latch      : unsigned(31 downto 0) := (others => '0');
     signal downcounter_value    : unsigned(31 downto 0) := (others => '0');
     signal downcounter_start    : unsigned(31 downto 0) := (others => '0');
-    signal downcounter_startB   : unsigned(31 downto 0) := (others => '0');	 
+    signal downcounter_startB   : unsigned(31 downto 0) := (others => '0');
+	 
+
 
     -- if using frequencies > 128MHz this counter will need to be wider than 7 bits
   --  signal counter_prescale     : unsigned(6 downto 0)  := (others => '0');
@@ -78,26 +80,27 @@ architecture Behavioral of timerD2 is
     signal regmux_updated       : std_logic_vector(31 downto 0);
     signal status_register_value  : std_logic_vector(7 downto 0);
 	 
-	 signal FIN_internA     	  	  : std_logic := '0';	
-	 signal FIN_internB     	  	  : std_logic := '0';	
-	 signal FIN_FB00	 				: std_logic := '0';
-	 signal FIN_signalack			: std_logic := '0'; 
-	 signal FeedB     			  : std_logic := '0';
-	 signal intINintern  		  : std_logic := '0';	
-	 signal TestSig_00  		     : std_logic := '0';	
-	 signal TestSig_01  		     : std_logic := '0';		 
-
-    signal FINcounter_value      		: unsigned(27 downto 0) := (others => '0');
-    constant FINcounterZero      		: unsigned(27 downto 0)  := to_unsigned (0, 28);
-    constant FINcounterEnd      		   : unsigned(27 downto 0)  := to_unsigned ((2000), 28);
+	 signal FIN_internA     	  	  : std_logic; 	
+	 signal FIN_internA2     	  	  : std_logic; 
+	 signal FIN_internB     	  	  : std_logic; 	
+	 signal FIN_FB00	 				: std_logic;
+	 signal FIN_signalack			: std_logic; 
+	 signal FeedB     			  : std_logic;
+	 signal intINintern  		  : std_logic ;	
+	 signal TestSig_00  		     : std_logic;	
+	 signal TestSig_01  		     : std_logic;	
+	 signal TestSig_02  		     : std_logic;	 
 
 
 begin
 
- --   interrupt <= (interrupt_signal and interrupt_enable);
-
     testPin2 <= TestSig_00;
     testPin1 <= TestSig_01; 
+	 
+    --testPin3 <= TestSig_02;
+    testPin3 <= FIN_internA2;	 
+    --testPin3 <= FIN_internA;
+	 
     FIN_out <= FIN_internB; 
 
 
@@ -139,21 +142,55 @@ begin
                 upcounter_latch    <= (others => '0');
                 downcounter_value  <= (others => '0');
                 downcounter_start  <= (others => '0');
-					 downcounter_startB  <= (others => '0');
-                --counter_prescale   <= (others => '0');
+					 downcounter_startB  <= (others => '0');				 
                 DowncounterStartBit   <= '0';
-             --   interrupt_signal   <= '0';
                 regmux_select      <= "00";
                 intINintern   <= '0';	
 					 FIN_internA	  <= '0';
+					 FIN_internA2	  <= '0';					 
 					 FIN_internB	  <= '0';
 					 FIN_FB00	 <= '0';				 	
 					 FIN_signalack <= '0';						 
                 FeedB   <= '0';	 
-					 TestSig_00 <= '0';	
-					 FINcounter_value  <= FINcounterZero;					 
-            end if;
+					 TestSig_00 <= '0';		
+
+
 --;----------------------------------------------------------------------------
+
+
+            elsif DowncounterStartBit = '1' then
+				
+					TestSig_01 <= '1';					--	******				
+
+
+							--if downcounter_value = 0 and FeedB = '0' then
+							if downcounter_value = 0  then							
+							FIN_internA <= '1';
+							--downcounter_value  <= downcounter_start;
+							FeedB   <= '1';
+					
+							--elsif FeedB = '0' then
+							else 
+							downcounter_value <= downcounter_value - 1;
+							FIN_internA <= '0';
+							FeedB   <= '0';
+							
+							end if;
+
+
+            elsif DowncounterStartBit = '0' then
+						downcounter_value <= downcounter_value;
+                  FIN_internA <= '0';	
+						TestSig_01 <= '0';					--	******		
+						FIN_internA2   <= '0';		
+
+						FeedB <= '0';
+						
+ 				end if;                  
+--;----------------------------------------------------------------------------
+
+				FIN_internA2  <= FIN_internA;
+
 --;----------------------------------------------------------------------------					 
 				if interruptIN = '1' and FeedB = '0' then
 							intINintern <= '1';	
@@ -168,9 +205,10 @@ begin
 				if FeedB = '0' then
 							intINintern <= '0';	
 				end if;
-
-				
+		
 --;----------------------------------------------------------------------------
+
+
 --;----------------------------------------------------------------------------					
 					 
 				if TestSig_00 = '1' then
@@ -181,27 +219,7 @@ begin
 					--TestSig_01 <= '0';					
 				end if;                  							
 --;----------------------------------------------------------------------------								
---;----------------------------------------------------------------------------
 
-            if DowncounterStartBit = '1' then
-				
-					FeedB <= '0';	
-					TestSig_01 <= '1';					--	******				
-
-					if downcounter_value = 0 then
-                  FIN_internA <= '1';
-						FIN_signalack	<= '0';						
-					else
-                  downcounter_value <= downcounter_value - 1;
-                  FIN_internA <= '0';										
-					end if;	
-								
-            elsif DowncounterStartBit = '0' then
-						downcounter_value <= downcounter_value;
-                  FIN_internA <= '0';	
-						TestSig_01 <= '0';					--	******						
- 				end if;                  
---;----------------------------------------------------------------------------
 --;----------------------------------------------------------------------------
 				if DowncounterStartBit = '1' then
 					TestSig_00 <= '0';				
@@ -209,36 +227,7 @@ begin
 					TestSig_00 <= '1';				
 			   end if;
 --;----------------------------------------------------------------------------
---;----------------------------------------------------------------------------
--- FIN_FB00 = '1' when no FIN_internB is required
 
-				if FIN_internA = '1' and FIN_signalack = '0' then
-					
-							if FINcounter_value = FINcounterEnd and FIN_FB00 = '0' then		-- if counter=end and FinB=0 (output required)
-								FIN_internB <= '0';
-								FINcounter_value  <= FINcounterZero;
-								FIN_FB00   <= '1';								
-					
-							elsif FIN_FB00 = '0' then													-- if counter=!end and FinB=0 (output required)
-								FINcounter_value <= FINcounter_value + 1;
-								FIN_internB <= '1';
-								FIN_FB00   <= '0';							
-							end if;
-
-				elsif FIN_internB = '1' and FIN_signalack = '1' then						-- clear FinB (output required) if ackd
-
-							FIN_internB <= '0';
-							FINcounter_value  <= FINcounterZero;
-							FIN_FB00   <= '1';
-
-				elsif FIN_internA = '0' and FIN_FB00 = '1' then								-- if no FinA then no FinB, clear FeedB, clear ack
-
-							FINcounter_value  <= FINcounterZero;
-							FIN_internB <= '0';
-							FIN_FB00 <= '0';
-							FIN_signalack <= '0';
-				end if;					
---;----------------------------------------------------------------------------
 
 
 

@@ -84,6 +84,7 @@ NET pin56         LOC="P56" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 20 on MBoard
 NET pin66         LOC="P66" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 6 on MBoardv1 i/o connector 
 NET pin65         LOC="P65" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 8 on MBoardv1 i/o connector 
 NET pin62         LOC="P62" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 10 on MBoardv1 i/o connector 
+NET pin98         LOC="P98" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 13 on MBoardv1 i/o connector 
 NET Extern_0      LOC="P55" | IOSTANDARD=LVTTL;   #  pin 55 on MBoardv1 i/o connector 
 
 
