@@ -3,7 +3,7 @@ Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
 
 promgen -w -p mcs -c FF -o "H:\Documents\Xilinx Projects\MAC10v1\31-01-2016 AntsMod 4\fpga\BIT FILE//Untitled" -x xcf04s -u 00000000 "H:/Documents/Xilinx Projects/MAC10v1/31-01-2016 AntsMod 4/fpga/work/top_level.bit" 
 
-PROM H:\Documents\Xilinx Projects\MAC10v1\31-01-2016 AntsMod 4\fpga\BIT FILE\Untitled.prm map: Sun Feb 28 20:51:15 2016
+PROM H:\Documents\Xilinx Projects\MAC10v1\31-01-2016 AntsMod 4\fpga\BIT FILE\Untitled.prm map: Mon Feb 29 18:26:33 2016
 
 Calculating PROM checksum with fill value ff
 
@@ -11,7 +11,7 @@ Format        Mcs86 (32-bit)
 Size          512K
 PROM start    0000:0000
 PROM end      0007:ffff
-PROM checksum 033b4a7a
+PROM checksum 033bbe1a
 
         Addr1        Addr2                     Date File(s)
-    0000:0000    0005:3393     Feb 28 20:50:58 2016 H:/Documents/Xilinx Projects/MAC10v1/31-01-2016 AntsMod 4/fpga/work/top_level.bit
+    0000:0000    0005:3393     Feb 29 18:26:11 2016 H:/Documents/Xilinx Projects/MAC10v1/31-01-2016 AntsMod 4/fpga/work/top_level.bit

@@ -162,6 +162,8 @@ architecture Behavioral of top_level is
     signal gpio_cs              : std_logic;
 	 signal gpio2_cs             : std_logic;
  	 signal intLatchs_cs			  : std_logic;
+ 	 signal tigoutA_cs			  : std_logic;	 
+
 
     -- data bus
     signal cpu_data_in          : std_logic_vector(7 downto 0);
@@ -180,7 +182,7 @@ architecture Behavioral of top_level is
     signal clkscale_out         : std_logic_vector(7 downto 0);
     signal gpio_data_out        : std_logic_vector(7 downto 0);
     signal gpio2_data_out       : std_logic_vector(7 downto 0);
-	 
+    signal tigoutA_data_out       : std_logic_vector(7 downto 0);	 
 
     -- GPIO
     signal gpio_input           : std_logic_vector(7 downto 0);
@@ -369,7 +371,8 @@ begin
         gpio_cs       <= '0';
         gpio2_cs      <= '0';	
         timer3_cs     <= '0';		
-        timerD2_cs     <= '0';		  
+        timerD2_cs     <= '0';	
+        tigoutA_cs     <= '0';		  
 		  intLatchs_cs <= '0';			  
 
         -- memory address decoding
@@ -406,8 +409,10 @@ begin
 
 	         when "01001" => intLatchs_cs        <= req_io;  -- 48 ... 4F		
 				
-	         when "01010" => timerD2_cs           <= req_io;  -- 50 ... 57					
-																				
+	         when "01010" => timerD2_cs           <= req_io;  -- 50 ... 57
+				
+	         when "01011" => tigoutA_cs        <= req_io;  -- 58 ... 5F
+				
             when "11110" => clkscale_cs         <= req_io;  -- F0 ... F7
             when "11111" => mmu_cs              <= req_io;  -- F8 ... FF
             when others =>
@@ -448,7 +453,8 @@ begin
        timerD2_data_out     when     timerD2_cs='1' else		 
        mmu_data_out        when        mmu_cs='1' else
        spimaster1_data_out when spimaster1_cs='1' else
-       spimaster2_data_out when spimaster2_cs='1' else		 
+       spimaster2_data_out when spimaster2_cs='1' else
+       tigoutA_data_out when tigoutA_cs='1' else
        clkscale_out        when   clkscale_cs='1' else
        gpio_data_out       when       gpio_cs='1' else
        gpio2_data_out      when      gpio2_cs='1' else						 
@@ -616,6 +622,12 @@ begin
 	--	device side => top level side
                clk => clk,
                reset => system_reset,
+               cpu_address => virtual_address(2 downto 0),
+               data_in => cpu_data_out,
+               data_out => tigoutA_data_out,					
+               enable => tigoutA_cs,
+               req_read => req_read,
+               req_write => req_write,					
                sigOUT => pin65,
 					sigIN => pin98dummy_00B				
            );
