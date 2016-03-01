@@ -217,6 +217,9 @@ architecture Behavioral of top_level is
 	 signal pin98dummy_00					: std_logic;		 
 	 signal pin98dummy_00B					: std_logic;
 
+	 signal D2timerLED					: std_logic;	 
+	 
+
 begin
     -- Hold CPU reset high for 8 clock cycles on startup,
     -- and when the user presses their reset button.
@@ -269,7 +272,9 @@ begin
 	 port3A(0) <= gpio2_output_n2(0);		-- modified AB 09-04-2015	 
 
     -- User LED (LED1) on Papilio Pro indicates when the CPU is being asked to wait (eg by the SDRAM cache)
-    leds(4) <= cpu_wait;
+    --leds(4) <= cpu_wait;
+	 
+	 leds(4) <= D2timerLED;
 
     -- Interrupt signal for the CPU
 --    cpu_interrupt_in <= (timer_interrupt);
@@ -606,7 +611,8 @@ begin
                req_write => req_write,
 					testPin1 => pin66,
 					testPin2 => pin62,
-					testPin3 => pin98dummy_00,					
+					testPin3 => pin98dummy_00,
+					LEDout => D2timerLED,					
 					FIN_out => INTERN_00,
 					interruptIN => Extern_0_intern
              --  interrupt => timerD2_interrupt

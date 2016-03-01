@@ -50,7 +50,8 @@ entity timerD2 is
            req_write        : in  std_logic;
 			  testPin1     	 : out std_logic;	
 			  testPin2     	 : out std_logic;	
-			  testPin3     	 : out std_logic;			  
+			  testPin3     	 : out std_logic;	
+			  LEDout     	 	 : out std_logic;				  
 			  FIN_out		    : out std_logic;	  
 			  interruptIN		 : in  std_logic
     );
@@ -90,6 +91,8 @@ architecture Behavioral of timerD2 is
 	 signal TestSig_00  		     : std_logic;	
 	 signal TestSig_01  		     : std_logic;	
 	 signal TestSig_02  		     : std_logic;	 
+	 
+	 signal LEDout_intern  		     : std_logic;	
 
 
 begin
@@ -103,6 +106,8 @@ begin
 	 
     FIN_out <= FIN_internB; 
 
+
+	 LEDout <= LEDout_intern;
 
     with cpu_address select
         data_out <=
@@ -153,7 +158,7 @@ begin
 					 FIN_signalack <= '0';						 
                 FeedB   <= '0';	 
 					 TestSig_00 <= '0';		
-
+					 LEDout_intern <= '0';
 
 --;----------------------------------------------------------------------------
 
@@ -284,6 +289,10 @@ begin
                             when "00000100" => downcounter_startB <= (downcounter_start - upcounter_value);									 		
 	                         when "00000101" => DowncounterStartBit <= '1';										
 	                         when "00000110" => DowncounterStartBit <= '0';												
+											
+	                         when "00001000" => LEDout_intern <= '0';	
+	                         when "00001001" => LEDout_intern <= '1';										 
+				
 											
                             when "00010000" => regmux_select <= "00";
                             when "00010001" => regmux_select <= "01";

@@ -67,8 +67,8 @@ NET NMIinput  		LOC="P48" | IOSTANDARD=LVTTL;  # NMI signal into cpu
 
 
 # User LEDs
-NET leds(4)         LOC="P112" | DRIVE=12 | IOSTANDARD=LVTTL;   # LED1 on Papilio Pro board
-NET leds(3)         LOC="P126" | DRIVE=12 | IOSTANDARD=LVTTL;   # LED1 on IO board - port 0x21 bit 3
+NET leds(4)         LOC="P112" | DRIVE=12 | IOSTANDARD=LVTTL;   # LED D4 on Papilio Pro board
+NET leds(3)         LOC="P126" | DRIVE=12 | IOSTANDARD=LVTTL;   # LED D5 IO board - port 0x21 bit 3
 NET leds(2)         LOC="P124" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED2 on IO board - port 0x21 bit 2
 NET leds(1)         LOC="P127" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED3 on IO board - port 0x21 bit 1
 NET leds(0)         LOC="P123" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED4 on IO board - port 0x21 bit 0
