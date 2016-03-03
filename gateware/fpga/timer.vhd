@@ -68,6 +68,7 @@ entity timer1 is
            enable           : in  std_logic;
            req_read         : in  std_logic;
            req_write        : in  std_logic;
+			  interruptIN		 : in  std_logic;			  
            interrupt        : out std_logic
     );
 end timer1;
@@ -92,6 +93,10 @@ architecture Behavioral of timer1 is
     signal regmux_output        : std_logic_vector(31 downto 0);
     signal regmux_updated       : std_logic_vector(31 downto 0);
     signal status_register_value: std_logic_vector(7 downto 0);
+
+	 signal FeedB     			  : std_logic;
+	 signal FeedB2     			  : std_logic;
+	 signal intINintern  		  : std_logic;
 
 begin
 
@@ -135,23 +140,46 @@ begin
                 counter_prescale   <= (others => '0');
                 interrupt_enable   <= '0';
                 interrupt_signal   <= '0';
+					 FeedB   <= '0';
+					 FeedB2   <= '0';					 
                 regmux_select      <= "00";
             else
-                -- prescaled counter
-                if counter_prescale = prescale_wrap then
-                    counter_prescale <= (others => '0'); -- reset prescale counter
-                    upcounter_value <= upcounter_value + 1;
-                    if downcounter_value = 0 then
-                        downcounter_value <= downcounter_start;
-                        interrupt_signal <= '1';
-                    else
-                        downcounter_value <= downcounter_value - 1;
-                    end if;
-                else
-                    counter_prescale <= counter_prescale + 1;
-                end if;
+ 
 
-                if enable = '1' and req_write = '1' then
+--;----------------------------------------------------------------------------					 
+				if interruptIN = '1' and FeedB = '0' then
+							intINintern <= '1';	
+							FeedB <= '1';
+							upcounter_latch <= upcounter_value;
+							FeedB2 <= '1';
+				
+				elsif interruptIN = '0' then				
+							FeedB <= '0';
+				end if;
+
+
+				if FeedB2 = '0' then	
+							upcounter_value <= upcounter_value + 1;
+				elsif FeedB2 = '1' then	
+							upcounter_value <= (others => '0');				
+							FeedB2 <= '0';
+				end if;	
+				
+--;----------------------------------------------------------------------------
+
+
+
+
+						  
+            if downcounter_value = 0 then
+							downcounter_value <= downcounter_start;
+                     interrupt_signal <= '1';
+            else
+							downcounter_value <= downcounter_value - 1;
+				end if;		
+
+
+            if enable = '1' and req_write = '1' then
                     if cpu_address = "000" then
                         interrupt_signal <= data_in(7);
                         interrupt_enable <= data_in(6);
@@ -177,7 +205,9 @@ begin
                             when others =>
                         end case;
                     end if;
-                end if;
+             end if;
+					
+					
             end if;
         end if;
     end process;

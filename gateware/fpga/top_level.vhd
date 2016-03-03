@@ -43,6 +43,7 @@ entity top_level is
 			  pin65					 : out    std_logic;				  
 			  pin62					 : out    std_logic;
 			  pin98					 : out    std_logic;			  
+			  pin80					 : out    std_logic;
 			  
 	    --    clk_2HzEXT      	 : out    std_logic;	-- 		  
 			  
@@ -572,6 +573,7 @@ begin
                enable => timer1_cs,
                req_read => req_read,
                req_write => req_write,
+					interruptIN => Extern_0_intern,
                interrupt => timer1_interrupt
            );
 
@@ -612,6 +614,7 @@ begin
 					testPin1 => pin66,
 					testPin2 => pin62,
 					testPin3 => pin98dummy_00,
+					testPin4 => pin80,
 					LEDout => D2timerLED,					
 					FIN_out => INTERN_00,
 					interruptIN => Extern_0_intern

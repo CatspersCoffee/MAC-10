@@ -51,6 +51,7 @@ entity timerD2 is
 			  testPin1     	 : out std_logic;	
 			  testPin2     	 : out std_logic;	
 			  testPin3     	 : out std_logic;	
+			  testPin4     	 : out std_logic;				  
 			  LEDout     	 	 : out std_logic;				  
 			  FIN_out		    : out std_logic;	  
 			  interruptIN		 : in  std_logic
@@ -64,7 +65,7 @@ architecture Behavioral of timerD2 is
     signal downcounter_value    : unsigned(31 downto 0) := (others => '0');
     signal downcounter_start    : unsigned(31 downto 0) := (others => '0');
     signal downcounter_startB   : unsigned(31 downto 0) := (others => '0');
-	 
+    constant fixvalue      	  : unsigned(31 downto 0)  := to_unsigned ((376), 32);	 
 
 
     -- if using frequencies > 128MHz this counter will need to be wider than 7 bits
@@ -91,7 +92,7 @@ architecture Behavioral of timerD2 is
 	 signal TestSig_00  		     : std_logic;	
 	 signal TestSig_01  		     : std_logic;	
 	 signal TestSig_02  		     : std_logic;	 
-	 
+	 signal TestSig_04  		     : std_logic;		 
 	 signal LEDout_intern  		     : std_logic;	
 
 
@@ -99,7 +100,9 @@ begin
 
     testPin2 <= TestSig_00;
     testPin1 <= TestSig_01; 
-	 
+	
+	 testPin4 <= TestSig_04; 
+	
     --testPin3 <= TestSig_02;
     testPin3 <= FIN_internA2;	 
     --testPin3 <= FIN_internA;
@@ -159,7 +162,7 @@ begin
                 FeedB   <= '0';	 
 					 TestSig_00 <= '0';		
 					 LEDout_intern <= '0';
-
+					 TestSig_04 <= '0';
 --;----------------------------------------------------------------------------
 
 
@@ -286,14 +289,15 @@ begin
                             when "00000001" => upcounter_value <= (others => '0');
                             when "00000010" => upcounter_latch <= upcounter_value;
                             when "00000011" => downcounter_value <= downcounter_startB;
-                            when "00000100" => downcounter_startB <= (downcounter_start - upcounter_value);									 		
+                            when "00000100" => downcounter_startB <= (downcounter_start - upcounter_value - fixvalue);									 		
 	                         when "00000101" => DowncounterStartBit <= '1';										
 	                         when "00000110" => DowncounterStartBit <= '0';												
 											
 	                         when "00001000" => LEDout_intern <= '0';	
 	                         when "00001001" => LEDout_intern <= '1';										 
-				
-											
+	                         when "00001010" => TestSig_04 <= '0';	
+	                         when "00001011" => TestSig_04 <= '1';					
+																
                             when "00010000" => regmux_select <= "00";
                             when "00010001" => regmux_select <= "01";
                             when "00010010" => regmux_select <= "10";
