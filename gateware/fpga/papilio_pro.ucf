@@ -76,13 +76,13 @@ NET leds(0)         LOC="P123" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED4 on IO boa
 NET port39(0)         LOC="P100" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED D8 on MBoardv1 - port 0x39 bit 0
 NET port39(1)         LOC="P78" | DRIVE=24 | IOSTANDARD=LVTTL;   # MBoardv1 - port 0x39 bit 1
 
-NET port3A(0)         LOC="P79" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 37 on MBoardv1 i/o connector - port 0x3A bit 0
+NET port3A(0)         LOC="P79" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 35 on MBoardv1 i/o connector (FPGA_79) - port 0x3A bit 0
 
 
 NET pin51         LOC="P51" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 24 on MBoardv1 i/o connector 
 NET pin56         LOC="P56" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 20 on MBoardv1 i/o connector 
 NET pin66         LOC="P66" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 6 on MBoardv1 i/o connector 
-NET pin65         LOC="P65" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 8 on MBoardv1 i/o connector 
+NET pin65         LOC="P65" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 8 on MBoardv1 i/o connector --> coil trigger out
 NET pin62         LOC="P62" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 10 on MBoardv1 i/o connector 
 NET pin98         LOC="P98" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 13 on MBoardv1 i/o connector 
 NET pin80         LOC="P80" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 33 on MBoardv1 i/o connector 
