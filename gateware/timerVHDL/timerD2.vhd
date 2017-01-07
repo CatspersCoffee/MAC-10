@@ -54,7 +54,8 @@ entity timerD2 is
 			  testPin4     	 : out std_logic;				  
 			  LEDout     	 	 : out std_logic;				  
 			  FIN_out		    : out std_logic;	  
-			  interruptIN		 : in  std_logic
+			  interruptIN		 : in  std_logic;
+			  Po51				 : out std_logic
     );
 end timerD2;
 
@@ -66,7 +67,7 @@ architecture Behavioral of timerD2 is
     signal downcounter_start    : unsigned(31 downto 0) := (others => '0');
     signal downcounter_startB   : unsigned(31 downto 0) := (others => '0');
     constant fixvalue      	  : unsigned(31 downto 0)  := to_unsigned ((376), 32);	 
-
+    constant fixvalue2      	  : unsigned(31 downto 0)  := to_unsigned ((226), 32);	
 
     -- if using frequencies > 128MHz this counter will need to be wider than 7 bits
   --  signal counter_prescale     : unsigned(6 downto 0)  := (others => '0');
@@ -93,8 +94,8 @@ architecture Behavioral of timerD2 is
 	 signal TestSig_01  		     : std_logic;	
 	 signal TestSig_02  		     : std_logic;	 
 	 signal TestSig_04  		     : std_logic;		 
-	 signal LEDout_intern  		     : std_logic;	
-
+	 signal LEDout_intern  		  : std_logic;	
+	 signal EpromPrgButn			  : std_logic;
 
 begin
 
@@ -111,6 +112,10 @@ begin
 
 
 	 LEDout <= LEDout_intern;
+
+	 Po51 <= EpromPrgButn;
+
+
 
     with cpu_address select
         data_out <=
@@ -163,6 +168,7 @@ begin
 					 TestSig_00 <= '0';		
 					 LEDout_intern <= '0';
 					 TestSig_04 <= '0';
+					 EpromPrgButn <= '0';
 --;----------------------------------------------------------------------------
 
 
@@ -283,13 +289,14 @@ begin
                     --    interrupt_enable <= data_in(6);
                         regmux_select <= data_in(1 downto 0);
 								
-                    elsif cpu_address = "001" then  -- (base+1) write value to status register and do operation accoring to value written
+                    elsif cpu_address = "001" then  -- (base+1) write value to status register and do operation accoring to value written	(port 51)
                         case data_in is
                             when "00000000" => FIN_signalack <= '1';
                             when "00000001" => upcounter_value <= (others => '0');
                             when "00000010" => upcounter_latch <= upcounter_value;
                             when "00000011" => downcounter_value <= downcounter_startB;
-                            when "00000100" => downcounter_startB <= (downcounter_start - upcounter_value - fixvalue);									 		
+                            --when "00000100" => downcounter_startB <= (downcounter_start - upcounter_value - fixvalue);	
+									 when "00000100" => downcounter_startB <= (downcounter_start - upcounter_value - fixvalue2);									 
 	                         when "00000101" => DowncounterStartBit <= '1';										
 	                         when "00000110" => DowncounterStartBit <= '0';												
 											
@@ -297,7 +304,10 @@ begin
 	                         when "00001001" => LEDout_intern <= '1';										 
 	                         when "00001010" => TestSig_04 <= '0';	
 	                         when "00001011" => TestSig_04 <= '1';					
-																
+														
+									 when "00001100" => EpromPrgButn <= '0';	
+									 when "00001101" => EpromPrgButn <= '1';	
+									
                             when "00010000" => regmux_select <= "00";
                             when "00010001" => regmux_select <= "01";
                             when "00010010" => regmux_select <= "10";

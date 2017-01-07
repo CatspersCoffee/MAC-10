@@ -43,7 +43,8 @@ entity top_level is
 			  pin65					 : out    std_logic;				  
 			  pin62					 : out    std_logic;
 			  pin98					 : out    std_logic;			  
-			  pin80					 : out    std_logic;
+			  pin80					 : out    std_logic; 
+			  pin38					 : out    std_logic;		--fpga pin 38, goes to PIC2520 button line (via transistor) for Terminal side programming mode singal.
 			  
 	    --    clk_2HzEXT      	 : out    std_logic;	-- 		  
 			  
@@ -279,7 +280,7 @@ begin
 
     -- Interrupt signal for the CPU
 --    cpu_interrupt_in <= (timer_interrupt);
-    cpu_interrupt_in <= (timer1_interrupt or uart0_interrupt or uart1_interrupt);	
+ --   cpu_interrupt_in <= (timer1_interrupt or uart0_interrupt or uart1_interrupt);	
 
 --    cpu_interrupt_in <= (timer_interrupt or uart0_interrupt or uart1_interrupt);	 
 
@@ -292,11 +293,18 @@ begin
 --	INTinputE <= interrupt00;
 --	INTinputE <= '0';	
 
-	INTinputE <= interruptMASTER;
+
+
+
+
+	INTinputE <= uart1_interrupt;	
+
+--	INTinputE <= interruptMASTER;
 -- pin56 <= interruptMASTER;
 	
 
  --NMIinputE <=  NMIinput;
+	NMIinputE <=  interruptMASTER;
  
  
 --	Extern_0_intern <= Extern_0;
@@ -316,15 +324,13 @@ begin
                  m1_cycle => cpu_m1_cycle,
 					  
 					  
-               --  interrupt => cpu_interrupt_in, 
 					  interrupt => INTinputE,
-				--	  interrupt => INTinput, 
+					--  interrupt => '0', 
 
 					--	interrupt => '0',	 --(disable interrupt active high)				  
 					  
-					  nmi => '0',
-					 --nmi => NMIinput,
-					--	nmi => NMIinputE,
+					 -- nmi => '0',
+						nmi => NMIinputE,
 					 
                  req_mem => cpu_req_mem,
                  req_io => cpu_req_io,
@@ -617,7 +623,8 @@ begin
 					testPin4 => pin80,
 					LEDout => D2timerLED,					
 					FIN_out => INTERN_00,
-					interruptIN => Extern_0_intern
+					interruptIN => Extern_0_intern,
+					Po51	=> pin38
              --  interrupt => timerD2_interrupt
            );
 

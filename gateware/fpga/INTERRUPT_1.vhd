@@ -1,7 +1,9 @@
 --
 --
---		Version 1.1
+--		Current Stable Version --> Version 1.1
 --
+--		Version 1.1
+--		Version 1.2	--> 24-12-2016 adding MASTER interrupt disable/enable function at port 49
 --
 
 library IEEE;
@@ -29,6 +31,7 @@ architecture Behavioral of int1 is
 
     signal interruptInternal_00     : std_logic := '0';
     signal Clear00     					: std_logic := '0';
+	 signal MasterEn     				: std_logic := '0';
     signal FB00     					   : std_logic := '0';	 
     signal counter_value      		: unsigned(27 downto 0) := (others => '0');
     constant counterZero      		: unsigned(27 downto 0)  := to_unsigned (0, 28);
@@ -40,8 +43,8 @@ architecture Behavioral of int1 is
 
 		test1 <= interruptInternal_00; 
 
-		test2 <= FB00; 
-
+		--test2 <= FB00; 
+		test2 <= MasterEn;
 
 	 int1_proc: process(clk)
 	 begin
@@ -51,7 +54,8 @@ architecture Behavioral of int1 is
 					if reset = '1' then
                 interruptInternal_00   <= '0';
 					-- interruptOut <= '0';
-                Clear00   <= '0';						 
+                Clear00   <= '0';
+					 MasterEn   <= '0';					 
                 FB00   <= '0';	
 					 counter_value  <= counterZero;
 					 
@@ -59,7 +63,7 @@ architecture Behavioral of int1 is
 
 
 --;----------------------------------------------------------------------------
-					elsif interruptIN_00 = '1' and Clear00 = '0' then
+					elsif interruptIN_00 = '1' and Clear00 = '0' and MasterEn = '1' then
 					
 							if counter_value = counterEnd and FB00 = '0' then
 							interruptInternal_00 <= '0';
@@ -97,13 +101,16 @@ architecture Behavioral of int1 is
 					
 						if cpu_address = "000" then
 							Clear00 <= data_in(0);
+							
+						elsif cpu_address = "001" then
+							MasterEn <= data_in(0);
 						end if;
 						
 					end if;
 
 
 
-
+--;----------------------------------------------------------------------------
 
 
 

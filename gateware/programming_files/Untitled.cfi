@@ -1,0 +1,11 @@
+# PROMGEN: Xilinx Prom Generator O.87xd
+# Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+
+SOFTWARE_VERSION O.87xd
+DATE            01/07/2017 - 16:39
+SOURCE          H:\Documents\Xilinx Projects\MAC10v1\31-01-2016 AntsMod 4\programming_files\Untitled.mcs
+DEVICE          XCF04S
+DATA_WIDTH      8
+FILL_DATA       0xFF
+SIGNATURE       0x033EA799
+START_ADDRESS   0x00000000 END_ADDRESS 0x00053393 DIRECTION_UP   "H:/Documents/Xilinx Projects/MAC10v1/31-01-2016 AntsMod 4/fpga/work/top_level.bit" 6slx9tqg144
