@@ -1,0 +1,17 @@
+PROMGEN: Xilinx Prom Generator O.87xd
+Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+
+promgen -w -p mcs -c FF -o "H:\Documents\Xilinx Projects\MAC10v1\31-01-2016 AntsMod 4\programming_files//Untitled" -x xcf04s -u 00000000 "H:/Documents/Xilinx Projects/MAC10v1/31-01-2016 AntsMod 4/fpga/work/top_level.bit" 
+
+PROM H:\Documents\Xilinx Projects\MAC10v1\31-01-2016 AntsMod 4\programming_files\Untitled.prm map: Sat Jan 07 16:39:25 2017
+
+Calculating PROM checksum with fill value ff
+
+Format        Mcs86 (32-bit)
+Size          512K
+PROM start    0000:0000
+PROM end      0007:ffff
+PROM checksum 033ea799
+
+        Addr1        Addr2                     Date File(s)
+    0000:0000    0005:3393     Dec 28 10:57:46 2016 H:/Documents/Xilinx Projects/MAC10v1/31-01-2016 AntsMod 4/fpga/work/top_level.bit

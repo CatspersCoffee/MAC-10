@@ -78,7 +78,9 @@ NET port39(1)         LOC="P78" | DRIVE=24 | IOSTANDARD=LVTTL;   # MBoardv1 - po
 
 NET port3A(0)         LOC="P79" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 35 on MBoardv1 i/o connector (FPGA_79) - port 0x3A bit 0
 
-NET pin38         LOC="P38" | DRIVE=24 | IOSTANDARD=LVTTL;   #  fpga pin 38, goes to PIC2520 button line (via transistor) for Terminal side programming mode singal.
+#NET pin38         LOC="P38" | DRIVE=24 | IOSTANDARD=LVTTL;   #  fpga pin 38, goes to PIC2520 button line (via transistor) for Terminal side programming mode singal.
+NET pin38         LOC="P75" | DRIVE=24 | IOSTANDARD=LVTTL;   #  fpga pin 38, goes to PIC2520 button line (via transistor) for Terminal side programming mode singal.
+
 NET pin51         LOC="P51" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 24 on MBoardv1 i/o connector 
 NET pin56         LOC="P56" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 20 on MBoardv1 i/o connector 
 NET pin66         LOC="P66" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 6 on MBoardv1 i/o connector 
