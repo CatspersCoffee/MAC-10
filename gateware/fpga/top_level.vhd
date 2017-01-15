@@ -45,6 +45,8 @@ entity top_level is
 			  pin98					 : out    std_logic;			  
 			  pin80					 : out    std_logic; 
 			  pin38					 : out    std_logic;		--fpga pin 38, goes to PIC2520 button line (via transistor) for Terminal side programming mode singal.
+			  pin57					 : out    std_logic;	
+			  pin59					 : out    std_logic;	   --pin59 of fpga to top board v3 CDI trigger
 			  
 	    --    clk_2HzEXT      	 : out    std_logic;	-- 		  
 			  
@@ -213,6 +215,7 @@ architecture Behavioral of top_level is
 		--External Events
 	 signal Extern_0_intern					: std_logic;		
 	 
+	 signal CDIout						:std_logic;
 	 
 	 signal INTERN_00					: std_logic;	
 
@@ -277,6 +280,12 @@ begin
     --leds(4) <= cpu_wait;
 	 
 	 leds(4) <= D2timerLED;
+
+
+	 --pin59 <= not CDIout;
+	 pin59 <= CDIout;
+
+
 
     -- Interrupt signal for the CPU
 --    cpu_interrupt_in <= (timer_interrupt);
@@ -644,7 +653,7 @@ begin
                enable => tigoutA_cs,
                req_read => req_read,
                req_write => req_write,					
-               sigOUT => pin65,
+               sigOUT => CDIout,
 					sigIN => pin98dummy_00B				
            );
 

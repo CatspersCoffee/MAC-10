@@ -1,23 +1,6 @@
-# UCF file for the Papilio Pro board
 #
-# Main board wing pin [] to FPGA pin Pxx map
-# -------C-------    -------B-------    -------A-------
-# [GND] [C00] P114   [GND] [B00] P99    P100 [A15]
-# [2V5] [C01] P115   [2V5] [B01] P97    P98 [A14]
-# [3V3] [C02] P116   [3V3] [B02] P92    P93 [A13]
-# [5V0] [C03] P117   [5V0] [B03] P87    P88 [A12]
-#       [C04] P118         [B04] P84    P85 [A11] [5V0]
-#       [C05] P119         [B05] P82    P83 [A10] [3V3]
-#       [C06] P120         [B06] P80    P81 [A09] [2V5]
-#       [C07] P121         [B07] P78    P79 [A08] [GND]
-# [GND] [C08] P123   [GND] [B08] P74    P75 [A07]
-# [2V5] [C09] P124   [2V5] [B09] P95    P67 [A06]
-# [3V3] [C10] P126   [3V3] [B10] P62    P66 [A05]
-# [5V0] [C11] P127   [5V0] [B11] P59    P61 [A04]
-#       [C12] P131         [B12] P57    P58 [A03] [5V0]
-#       [C13] P132         [B13] P55    P56 [A02] [3V3]
-#       [C14] P133         [B14] P50    P51 [A01] [2V5]
-#       [C15] P134         [B15] P47    P48 [A00] [GND]
+# UCF file for MAC10 v2 Board
+#
 
 ################################################################################
 # socz80 notes:
@@ -68,23 +51,31 @@ NET NMIinput  		LOC="P48" | IOSTANDARD=LVTTL;  # NMI signal into cpu
 
 # User LEDs
 NET leds(4)         LOC="P112" | DRIVE=12 | IOSTANDARD=LVTTL;   # LED D4 on Papilio Pro board
-NET leds(3)         LOC="P126" | DRIVE=12 | IOSTANDARD=LVTTL;   # LED D5 IO board - port 0x21 bit 3
+#NET leds(3)         LOC="P126" | DRIVE=12 | IOSTANDARD=LVTTL;   # LED D5 IO board - port 0x21 bit 3
+NET leds(3)         LOC="P100" | DRIVE=12 | IOSTANDARD=LVTTL;   # LED D5 IO board - port 0x21 bit 3
+
 NET leds(2)         LOC="P124" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED2 on IO board - port 0x21 bit 2
 NET leds(1)         LOC="P127" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED3 on IO board - port 0x21 bit 1
 NET leds(0)         LOC="P123" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED4 on IO board - port 0x21 bit 0
 
-NET port39(0)         LOC="P100" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED D8 on MBoardv1 - port 0x39 bit 0
+#NET port39(0)         LOC="P100" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED D8 on MBoardv1 - port 0x39 bit 0
+#NET port39(0)         LOC="P126" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED D5 on MBoardv2 - port 0x39 bit 0
+NET port39(0)         LOC="P74" | DRIVE=24 | IOSTANDARD=LVTTL;   # LED D11 on Top Board v3 - port 0x39 bit 0
+
 NET port39(1)         LOC="P78" | DRIVE=24 | IOSTANDARD=LVTTL;   # MBoardv1 - port 0x39 bit 1
 
 NET port3A(0)         LOC="P79" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 35 on MBoardv1 i/o connector (FPGA_79) - port 0x3A bit 0
 
-#NET pin38         LOC="P38" | DRIVE=24 | IOSTANDARD=LVTTL;   #  fpga pin 38, goes to PIC2520 button line (via transistor) for Terminal side programming mode singal.
-NET pin38         LOC="P75" | DRIVE=24 | IOSTANDARD=LVTTL;   #  fpga pin 38, goes to PIC2520 button line (via transistor) for Terminal side programming mode singal.
+NET pin38         LOC="P38" | DRIVE=24 | IOSTANDARD=LVTTL;   #  fpga pin 38, goes to PIC2520 button line (via transistor) for Terminal side programming mode singal.
+#NET pin38         LOC="P75" | DRIVE=24 | IOSTANDARD=LVTTL;   #  fpga pin 38, goes to PIC2520 button line (via transistor) for Terminal side programming mode singal.
 
 NET pin51         LOC="P51" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 24 on MBoardv1 i/o connector 
 NET pin56         LOC="P56" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 20 on MBoardv1 i/o connector 
 NET pin66         LOC="P66" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 6 on MBoardv1 i/o connector 
-NET pin65         LOC="P65" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 8 on MBoardv1 i/o connector --> coil trigger out
+#NET pin65         LOC="P65" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 8 on MBoardv1 i/o connector --> coil trigger out
+#NET pin57         LOC="P57" | DRIVE=24 | IOSTANDARD=LVTTL;   #  --> coil trigger out (old)
+NET pin59         LOC="P59" | DRIVE=24 | IOSTANDARD=LVTTL;   #  --> coil trigger out to top board 3
+
 NET pin62         LOC="P62" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 10 on MBoardv1 i/o connector 
 NET pin98         LOC="P98" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 13 on MBoardv1 i/o connector 
 NET pin80         LOC="P80" | DRIVE=24 | IOSTANDARD=LVTTL;   #  pin 33 on MBoardv1 i/o connector 
@@ -116,12 +107,19 @@ NET flash1_spi_mosi LOC="P132" | IOSTANDARD=LVTTL | SLEW=FAST; #data into flash
 NET flash1_spi_miso LOC="P111" | IOSTANDARD=LVTTL | SLEW=FAST | PULLUP;
 
 # to Flash2 on MBoardv1
-NET flash2_spi_cs    LOC="P38"  | IOSTANDARD=LVTTL | SLEW=FAST;
-NET flash2_spi_clk   LOC="P105"  | IOSTANDARD=LVTTL | SLEW=FAST;
-NET flash2_spi_mosi  LOC="P64"  | IOSTANDARD=LVTTL | SLEW=FAST;
-NET flash2_spi_miso  LOC="P101"  | IOSTANDARD=LVTTL | SLEW=FAST | PULLUP;
+#NET flash2_spi_cs    LOC="P38"  | IOSTANDARD=LVTTL | SLEW=FAST;				#on MAC10v1 board
+#NET flash2_spi_clk   LOC="P105"  | IOSTANDARD=LVTTL | SLEW=FAST;				#on MAC10v1 board
+#NET flash2_spi_mosi  LOC="P64"  | IOSTANDARD=LVTTL | SLEW=FAST;				#on MAC10v1 board
+#NET flash2_spi_miso  LOC="P101"  | IOSTANDARD=LVTTL | SLEW=FAST | PULLUP;	#on MAC10v1 board
 #FPGA P101 to pin2 Flash (Dout)
 #FPGA P105 to pin6 Flash (CLK)
+
+# To Flash2 on MBoardv2
+NET flash2_spi_cs    LOC="P114"  | IOSTANDARD=LVTTL | SLEW=FAST;				#on MAC10v2 board
+NET flash2_spi_clk   LOC="P116"  | IOSTANDARD=LVTTL | SLEW=FAST;				#on MAC10v2 board
+NET flash2_spi_mosi  LOC="P117"  | IOSTANDARD=LVTTL | SLEW=FAST;				#on MAC10v2 board
+NET flash2_spi_miso  LOC="P115"  | IOSTANDARD=LVTTL | SLEW=FAST | PULLUP;	#on MAC10v2 board
+#FPGA P101 to pin2 Flash (Dout)
 
 
 # SDRAM on Papilio Pro (MT48LC4M16)

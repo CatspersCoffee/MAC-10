@@ -1,9 +1,9 @@
 PROMGEN: Xilinx Prom Generator O.87xd
 Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
 
-promgen -w -p mcs -c FF -o "H:\Documents\Xilinx Projects\MAC10v1\31-01-2016 AntsMod 4\programming_files//Untitled" -x xcf04s -u 00000000 "H:/Documents/Xilinx Projects/MAC10v2/08-01-2017 AntsMod 5/fpga/work/top_level.bit" 
+promgen -w -p mcs -c FF -o "H:\Documents\Xilinx Projects\MAC10v2\08-01-2017 AntsMod 5\programming_files//Untitled" -x xcf04s -u 00000000 "H:\Documents\Xilinx Projects\MAC10v2\08-01-2017 AntsMod 5\fpga\work\top_level.bit" 
 
-PROM H:\Documents\Xilinx Projects\MAC10v1\31-01-2016 AntsMod 4\programming_files\Untitled.prm map: Sun Jan 08 13:30:25 2017
+PROM H:\Documents\Xilinx Projects\MAC10v2\08-01-2017 AntsMod 5\programming_files\Untitled.prm map: Mon Jan 16 02:13:14 2017
 
 Calculating PROM checksum with fill value ff
 
@@ -11,7 +11,7 @@ Format        Mcs86 (32-bit)
 Size          512K
 PROM start    0000:0000
 PROM end      0007:ffff
-PROM checksum 033e06c6
+PROM checksum 033c8516
 
         Addr1        Addr2                     Date File(s)
-    0000:0000    0005:3393     Jan 08 13:27:25 2017 H:/Documents/Xilinx Projects/MAC10v2/08-01-2017 AntsMod 5/fpga/work/top_level.bit
+    0000:0000    0005:3393     Jan 16 02:13:05 2017 H:/Documents/Xilinx Projects/MAC10v2/08-01-2017 AntsMod 5/fpga/work/top_level.bit
