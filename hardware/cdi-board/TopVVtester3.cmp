@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 10/30/2016 12:36:31 AM
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 3/7/2016 5:25:07 PM
 
 BeginCmp
 TimeStamp = /561EE02F;
@@ -75,6 +75,13 @@ TimeStamp = /56D90E90;
 Reference = C11;
 ValeurCmp = 100nF;
 IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /561FAE64;
+Reference = C12;
+ValeurCmp = 10 uF;
+IdModule  = Cap_Elec_Radial_5mm;
 EndCmp
 
 BeginCmp
@@ -218,17 +225,10 @@ IdModule  = ^^PowerIN_1pin;
 EndCmp
 
 BeginCmp
-TimeStamp = /578054D6;
+TimeStamp = /56DA4AE6;
 Reference = P2;
-ValeurCmp = CONN_10X2;
-IdModule  = ^^PIN_ARRAY_10X2;
-EndCmp
-
-BeginCmp
-TimeStamp = /5780F002;
-Reference = P2.1;
-ValeurCmp = CONN_10X2;
-IdModule  = ^^PIN_ARRAY_10X2;
+ValeurCmp = CONN_1;
+IdModule  = ^^PowerIN_1pin;
 EndCmp
 
 BeginCmp
@@ -246,20 +246,6 @@ IdModule  = ^^power1pin6mm*;
 EndCmp
 
 BeginCmp
-TimeStamp = /56DA4AE6;
-Reference = P5;
-ValeurCmp = CONN_1;
-IdModule  = ^^PowerIN_1pin;
-EndCmp
-
-BeginCmp
-TimeStamp = /58148C84;
-Reference = P6;
-ValeurCmp = CONN_1;
-IdModule  = ^^PowerIN_1pin;
-EndCmp
-
-BeginCmp
 TimeStamp = /56DA531C;
 Reference = P7;
 ValeurCmp = CONN_3;
@@ -271,13 +257,6 @@ TimeStamp = /5620A372;
 Reference = P8;
 ValeurCmp = CONN_10X2;
 IdModule  = ^^PIN_ARRAY_10X2;
-EndCmp
-
-BeginCmp
-TimeStamp = /58148C8A;
-Reference = P9;
-ValeurCmp = CONN_1;
-IdModule  = ^^PowerIN_1pin;
 EndCmp
 
 BeginCmp
@@ -311,6 +290,20 @@ EndCmp
 BeginCmp
 TimeStamp = /56DA4247;
 Reference = P24;
+ValeurCmp = CONN_1;
+IdModule  = ^^PowerIN_1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /56DA426B;
+Reference = P26;
+ValeurCmp = CONN_1;
+IdModule  = ^^PowerIN_1pin;
+EndCmp
+
+BeginCmp
+TimeStamp = /56DA4276;
+Reference = P27;
 ValeurCmp = CONN_1;
 IdModule  = ^^PowerIN_1pin;
 EndCmp
