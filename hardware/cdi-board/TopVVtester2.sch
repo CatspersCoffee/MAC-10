@@ -151,14 +151,14 @@ LIBS:sdcard-mini_03
 LIBS:st78c34
 LIBS:wildcard88
 LIBS:ANTS_MOD1
-LIBS:TopVVtester3-cache
+LIBS:TopVVtester2-cache
 EELAYER 27 0
 EELAYER END
 $Descr A2 23386 16535
 encoding utf-8
 Sheet 1 1
 Title ""
-Date "15 jan 2017"
+Date "16 jan 2017"
 Rev ""
 Comp ""
 Comment1 ""
@@ -2238,6 +2238,48 @@ F 3 "" H 1800 3900 60  0000 C CNN
 	1    1800 3900
 	1    0    0    -1  
 $EndComp
-Text Notes 14400 8150 0    60   ~ 0
-NOTE: 15-01-2017 this \ndiode "D1" is around\n the wrong way
+Text Notes 14750 8150 0    60   ~ 0
+NOTE: 15-01-2017 this\nDiode "D1" is around\nthe wrong way.
+Text Notes 13950 10500 0    60   ~ 0
+NOTE: 15-01-2017 \nopto isolator circuit does not work,\nthis needs to be revisited on the next revision.\n\nusing T2 and R24 works to give signal to R3
+Text Notes 18350 9150 0    60   ~ 0
+NOTE: 15-01-2017 this\nC3 should be 10nF &\nnon polar footprint
+Text Notes 16650 9200 0    60   ~ 0
+NOTE: 15-01-2017 \nD3 foot print incorrect
+Text Notes 15850 7150 0    60   ~ 0
+NOTE: 15-01-2017 \nD1 and D2 increase foot print\nhole diamater
+Text Notes 17600 7200 0    60   ~ 0
+NOTE: 15-01-2017 this\nC2 should be polar cap\nwith -ve toward SCR
+Wire Notes Line
+	18000 7450 18000 7800
+Wire Notes Line
+	18000 7800 17650 7800
+Wire Notes Line
+	18550 8550 18700 8550
+Wire Notes Line
+	18700 8550 18700 9050
+Wire Notes Line
+	16900 8700 16900 9100
+Wire Notes Line
+	16900 9100 16850 9100
+Wire Notes Line
+	15450 7950 15200 7950
+Wire Notes Line
+	15200 7950 15200 8050
+Wire Notes Line
+	16600 7250 16600 7950
+Wire Notes Line
+	16600 7500 16050 7500
+Wire Notes Line
+	16600 7950 15750 7950
+Wire Notes Line
+	13900 9050 16050 9050
+Wire Notes Line
+	16050 9050 16050 10300
+Wire Notes Line
+	16050 10300 13900 10300
+Wire Notes Line
+	13900 10300 13900 9050
+Wire Notes Line
+	15100 10300 15100 10450
 $EndSCHEMATC
