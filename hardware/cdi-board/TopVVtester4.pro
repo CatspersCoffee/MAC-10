@@ -1,4 +1,4 @@
-update=2/11/2016 7:21:24 PM
+update=1/24/2017 3:28:28 PM
 last_client=eeschema
 [cvpcb]
 version=1
@@ -156,7 +156,7 @@ LibName127=numato/numato_kicad_lib
 [eeschema]
 version=1
 LibDir=../Ants Librarys
-NetFmtName=
+NetFmtName=PcbnewAdvanced
 RptD_X=0
 RptD_Y=100
 RptLab=1
