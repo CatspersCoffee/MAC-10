@@ -1,0 +1,29 @@
+# Xilinx ISE build output (keep only the final bitstream)
+gateware/fpga/work/*
+!gateware/fpga/work/top_level.bit
+_xmsgs/
+iseconfig/
+*_xdb/
+*.xrpt
+*webtalk*
+*.xwbt
+usage_statistics*
+*_envsettings.html
+*_summary.html
+*.gise
+*.cmd_log
+
+# KiCad backups, autosaves, lock files, autorouter intermediates
+*.bak
+*-bak
+*.000
+$savepcb*
+_autosave-*
+*.lck
+*.kicad_prl
+*.dsn
+*.ses
+fp-info-cache
+
+# Office lock files
+~$*

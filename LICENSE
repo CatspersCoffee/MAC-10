@@ -1,0 +1,10 @@
+MAC-10 is distributed under more than one license.
+
+  gateware/   GPL-3.0-or-later   see LICENSES/GPL-3.0-or-later.txt
+  hardware/   CERN-OHL-S-2.0     see LICENSES/CERN-OHL-S-2.0.txt
+  docs/       CC-BY-4.0          https://creativecommons.org/licenses/by/4.0/
+
+Files that carry their own license header (for example the socZ80, T80
+and SSRAM sources in gateware/) are covered by that header.
+
+Copyright (C) 2013-2017 Antony Burrows
